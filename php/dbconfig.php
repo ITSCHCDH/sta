@@ -2,7 +2,7 @@
     //Mysql Trayectoria
     define("DB_SERVER", "localhost");
     define("DB_USER", "root");
-    define("DB_PASS", "Sistemas2018");
+    define("DB_PASS", "");
     define("DB_NAME", "sta");
 
     // MySQl Caracterizacion
