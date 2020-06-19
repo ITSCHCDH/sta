@@ -183,7 +183,6 @@
     <div class="container cuerpo">
         <div class="row">
             <div class="progress">
-                <?php echo $_SESSION['usuario']['caract']; ?>
                 <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <form id="form_AluAcept" method="post">
@@ -462,7 +461,7 @@
                 $('#alert_msg').css('height', '100px').css('font-size', '20px');
                 event.preventDefault();
                 var todoBien = true;
-
+                if ($("input[name='namef[]']").val()=="" || $("input[name='nacf[]']").val()=="" ||$("input[name='actf[]']").val()=="" || $("select[name='sexf[]']").val() =="" || $("select[name='parefam[]']").val()==""){ todoBien = false; sendMessageR('Desbes de agregar tus datos en la tabla por lo menos', "#DA0000");}
                 if ($('#fiden_relfa').val() === "") { todoBien = false; sendMessageR('Contesta como es tu relación familiar', "#DA0000");}
 
                 if ( !$("#form_AluAcept input[name='dif']:radio").is(':checked')) { todoBien = false; sendMessageR('Indica si es que tienes problemas familiares o no', "#DA0000");}

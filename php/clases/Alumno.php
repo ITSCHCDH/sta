@@ -70,7 +70,7 @@
             }
             else{
                 $this->_sql="SELECT dbo.Alumnos.alu_NumControl, dbo.Alumnos.alu_Nombre, dbo.Alumnos.alu_ApePaterno, dbo.Alumnos.alu_ApeMaterno, dbo.Alumnos.alu_Sexo, dbo.Alumnos.alu_SemestreAct,
-                 (SELECT dbo.Carreras.car_Nombre FROM dbo.Carreras WHERE dbo.Carreras.car_Clave  = dbo.Alumnos.car_Clave) AS Car FROM dbo.Alumnos WHERE dbo.Alumnos.alu_NumControl = '".$_GET['NoCon']."'";
+                (SELECT dbo.Carreras.car_Nombre FROM dbo.Carreras WHERE dbo.Carreras.car_Clave  = dbo.Alumnos.car_Clave) AS Car FROM dbo.Alumnos WHERE dbo.Alumnos.alu_NumControl = '".$_GET['NoCon']."'";
                 $stmt = sqlsrv_query ( $this->_db2, $this->_sql)
                     or die('Query failed: '.$this->_sql);
                     $row = sqlsrv_fetch_array($stmt);
@@ -1461,8 +1461,6 @@
                         </div>
                     </div>
                 ';
-
-
         }
 
         public function aluFiFamilia($noCon){
@@ -2541,7 +2539,7 @@
                         }
                     }
                     if ($err == true) {
-                        echo json_encode(['error' => true, 'er' => "Error en execute familiar" . $this->_db->error]);
+                        echo json_encode(['error' => true, 'er' => "Error en execute familiarisisisisi". count($_POST['namef']) . $this->_db->error]);
                         $fam2 = false;
 
                     } elseif($er>0) {
@@ -2554,11 +2552,9 @@
                     }
                 }
             }
-            else{
-                    echo json_encode(['error' => true, 'er' => "Error en execute familiar" . $this->_db->error]);
-
-            }
-
+            //else{
+            //       echo json_encode(['error' => true, 'er' => "Error en execute familiar" . $this->_db->error]);
+            //}
             if ($caracterizacion == true && $padr ==true &&$perl == true && $medic == true && $fam == true && $soci == true && $fam2 == true) {
                 echo json_encode(['error' => false]);
             } else {
@@ -3372,7 +3368,7 @@
                 $tip=explode("/", $tipo);
 
                 if ($tipo != 'application/pdf' ) {
-                  echo "Error, el archivo no es un pdf";
+                    echo "Error, el archivo no es un pdf";
                 }
                 else {
                     $src = $carpeta.$user.".".$tip[1];
@@ -3381,7 +3377,7 @@
                     if (move_uploaded_file($ruta_provisional, $src)) {
                         $arch=true;
                     }
-                    $this->_sql="UPDATE alumnos_caracterizacion SET al_pdf ='".$user.".".$tip[1]."' WHERE se_no_control=$user";
+                    $this->_sql="UPDATE alumnos_caracterizacion SET al_pdf ='".$user.".".$tip[1]."' WHERE se_no_control='$user'";
                     $resultado = $this->_db->query($this->_sql);
                     if($this->_db->affected_rows > 0){
                         $sql=true;
@@ -3419,17 +3415,17 @@
             if ($resultado->num_rows > 0) {
                 $row = $resultado->fetch_assoc();
                 echo '<div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-2 toppad">
-                		<h2>Puedes ver tu antigua ficha aqui</h2>
-                        <a class="btn btn-primary view-pdf" download="'.$no.'.pdf" href="/sta/pdf/'.$row['al_pdf'].'">Ver PDF</a>
-            	    </div>
-                </div>';
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-2 toppad">
+                            <h2>Puedes ver tu antigua ficha aqui</h2>'.
+                            '<a class="btn btn-primary view-pdf" download="'.$no.'.pdf" href="/sta/pdf/'.$row['al_pdf'].'">Ver PDF</a>
+                        </div>
+                    </div>';
             }else {
                 echo '<div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-2 toppad">
-                		<h2>No has subido ninguna ficha aun</h2>
-                    </div>
-                </div>';
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-2 toppad">
+                            <h2>No has subido ninguna ficha aun</h2>
+                        </div>
+                    </div>';
             }
 
         }

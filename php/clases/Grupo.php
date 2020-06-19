@@ -563,7 +563,7 @@ require_once $_SERVER["DOCUMENT_ROOT"]."/sta/php/dbconfig.php";
         function insertarAlumnos(){
             $grup = mysqli_real_escape_string($this->_db,(strip_tags($_POST['Nom_Grupo'], ENT_QUOTES) ) );
 
-            $this->_sql="SELECT grupos_tutorias.gpo_clave FROM grupos_tutorias WHERE grupos_tutorias.gpo_identificador='".$_POST['Identificador']."' AND grupos_tutorias.cat_clave=".$_SESSION['usuario']['Cat'];
+            $this->_sql="SELECT grupos_tutorias.gpo_clave FROM grupos_tutorias WHERE grupos_tutorias.gpo_identificador='".$_POST['Identificador']."' AND grupos_tutorias.cat_clave='".$_SESSION['usuario']['Cat']."'";
             if(!$resultado = $this->_db->query($this->_sql) ){
                 echo json_encode(array('error'=>true,'er'=>"Error en" . $this->_db->errno . $this->_sql ) );
             }
@@ -571,7 +571,7 @@ require_once $_SERVER["DOCUMENT_ROOT"]."/sta/php/dbconfig.php";
                 $row= $resultado->fetch_assoc();
                 $clave=$row['gpo_clave'];
 
-                $this->_sql="UPDATE grupos_tutorias SET gpo_nombre = '".$grup."' WHERE grupos_tutorias.gpo_identificador='".$_POST['Identificador']."' AND grupos_tutorias.cat_clave=".$_SESSION['usuario']['Cat'];
+                $this->_sql="UPDATE grupos_tutorias SET gpo_nombre = '".$grup."' WHERE grupos_tutorias.gpo_identificador='".$_POST['Identificador']."' AND grupos_tutorias.cat_clave='".$_SESSION['usuario']['Cat']."'";
                 if(!$resultado=$this->_db->query($this->_sql)){
                     echo json_encode(['error' => TRUE, 'er'=> "Error, no se pudo modificar el nombre de grupo.".$this->_sql ]);
                     exit;

@@ -213,7 +213,7 @@ class Profesor{
             INNER JOIN dbo.Catedraticos ON dbo.GruposSemestre.cat_Clave = dbo.Catedraticos.cat_Clave
             INNER JOIN dbo.Reticula ON dbo.GruposSemestre.ret_Clave = dbo.Reticula.ret_Clave
             WHERE
-            dbo.Catedraticos.cat_Clave = ".$_SESSION['usuario']['Cat'];
+            dbo.Catedraticos.cat_Clave = '".$_SESSION['usuario']['Cat']."'";
         $stmt=sqlsrv_query ( $this->_db2, $this->_sql);
 
         if($stmt!=false){
