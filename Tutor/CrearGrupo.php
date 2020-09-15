@@ -175,24 +175,47 @@
 
         };
         $(document).ready(function(){
-        $('#mitabla').DataTable({
-            "order": [[1, "asc"]],
-            "language":{
-            "lengthMenu": "Mostrar _MENU_ registros por pagina",
-            "info": "Mostrando pagina _PAGE_ de _PAGES_",
-                "infoEmpty": "No hay registros disponibles",
-                "infoFiltered": "(filtrada de _MAX_ registros)",
-                "loadingRecords": "Cargando...",
-                "processing":     "Procesando...",
-                "search": "Buscar:",
-                "zeroRecords":    "No se encontraron registros coincidentes",
-                "paginate": {
-                    "next":       "Siguiente",
-                    "previous":   "Anterior"
+            $('#mitabla').DataTable({
+                "lengthMenu": [[20, 30, 50], [20, 30, 50]],
+                language: {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla =(",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    },
+                    "buttons": {
+                        "copy": "Copiar",
+                        "colvis": "Visibilidad"
+                    }
                 },
-            }
+                "processing": true, // para mostrar la barra de progreso
+                "serverSide": false, // Para procesar del lado del servidor
+                "filter": false, // desactiva el cuadro de busqueda
+                "orderMulti": false, // para deshabilitar varias columnas a la vez
+                "destroy": true,
+                "paging": false,
+                "info": false,
+                "searching": false,
+                "ordering": false,
+            });
         });
-    });
     </script>
 </body>
 

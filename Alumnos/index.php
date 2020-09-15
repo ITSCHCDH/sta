@@ -214,7 +214,7 @@
                             <p>
                                 <input type="checkbox" id="agree" name="accept" />
                                 <label for="agree">Yo Acepto</label>
-                                <input type="submit" id="aceptoAlumno"  onclick="$('#form_AluAcept').submit();" value="GUARDAR Y FIRMAR" />
+                                <input type="submit" id="aceptoAlumno" value="GUARDAR Y FIRMAR" onclick="$('#form_AluAcept').submit();"/>
                             </p>
                         </div>
                     </div>
@@ -222,7 +222,7 @@
                 </fieldset>
             </form>
             <p class="narrow text-center">
-                La informacion proporcionada es exclusiva del Departamento de Tutorias y Servicios Psicopedagógicos.
+                La información proporcionada es exclusiva del Departamento de Tutorias y Servicios Psicopedagógicos.
             </p>
         </div>
     </div>
@@ -247,7 +247,7 @@
     </footer>
     <!-- /footer -->
     <!-- js -->
-    <script src="/sta/assets/js/jquery.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js" integrity="sha256-oTyWrNiP6Qftu4vs2g0RPCKr3g1a6QTlITNgoebxRc4=" crossorigin="anonymous"></script>
     <script src="/sta/assets/js/jquery.loadingModal.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -425,7 +425,7 @@
                 if ($('input[name=fip_per_vivienda]').is(':checked')) { todoBien = false; window.location.href='#nump'; sendMessageR('Introduce un numero de las personas con las que vives', "#DA0000"); $("#fip_per_vivienda").focus(); }
                 if ($('#fip_per_parentesco').val() === "") { todoBien = false; window.location.href='#nump'; sendMessageR('Describe el parentescon con las personas que vives actualemente', "#DA0000"); $("#fip_per_parentesco").focus(); }
 
-                if ($('#fip_rel_padres').val() === "") { todoBien = false; window.location.href='#relPad'; sendMessageR('Debe seleccionar la relacion de tus padres', "#DA0000"); $("#fip_rel_padres").focus(); }
+                if (($("input [name='nomPa']").val()!= "" &&  $("input [name='nomMa']").val()!= "") && $('#fip_rel_padres').val() === "") { todoBien = false; window.location.href='#relPad'; sendMessageR('Debe seleccionar la relacion de tus padres', "#DA0000"); $("#fip_rel_padres").focus(); }
 
                 if (todoBien ==true) {
                     current_step = $(this).parent();
@@ -461,7 +461,7 @@
                 $('#alert_msg').css('height', '100px').css('font-size', '20px');
                 event.preventDefault();
                 var todoBien = true;
-                if ($("input[name='namef[]']").val()=="" || $("input[name='nacf[]']").val()=="" ||$("input[name='actf[]']").val()=="" || $("select[name='sexf[]']").val() =="" || $("select[name='parefam[]']").val()==""){ todoBien = false; sendMessageR('Desbes de agregar tus datos en la tabla por lo menos', "#DA0000");}
+                //if ($("input[name='namef[]']").val()=="" || $("input[name='nacf[]']").val()=="" || $("input[name='actf[]']").val()=="" || $("select[name='sexf[]']").val() =="" || $("select[name='parefam[]']").val()==""){ todoBien = false; sendMessageR('Desbes de agregar tus datos en la tabla por lo menos', "#DA0000");}
                 if ($('#fiden_relfa').val() === "") { todoBien = false; sendMessageR('Contesta como es tu relación familiar', "#DA0000");}
 
                 if ( !$("#form_AluAcept input[name='dif']:radio").is(':checked')) { todoBien = false; sendMessageR('Indica si es que tienes problemas familiares o no', "#DA0000");}

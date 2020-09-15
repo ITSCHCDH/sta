@@ -17,7 +17,7 @@
 
 .cuerpo {
     width: 95% !important;
-    min-height: 450px;
+    min-height: calc(100vh - 214px - 180px);
     margin: auto;
     padding: auto;
 }

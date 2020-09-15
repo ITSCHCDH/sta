@@ -2357,7 +2357,11 @@
             VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
             $caracterizacion =false;
-            $nom = $this->_db->real_escape_string( trim($_POST['dp_nombre'] ) ); $ap = $this->_db->real_escape_string( trim($_POST['dp_ap_paterno'] ) ); $am = $this->_db->real_escape_string( trim($_POST['dp_ap_materno'] ) ); $edad = $this->_db->real_escape_string(trim($_POST['dp_edad'])); $talla = $this->_db->real_escape_string(trim($_POST['fm_talla'])); $peso = $this->_db->real_escape_string(trim($_POST['fm_peso'])); $sex = $this->_db->real_escape_string(trim($_POST['dp_sexo'])); $car = $this->_db->real_escape_string(trim($_POST['dp_carrera'])); $gpo = $this->_db->real_escape_string(trim($_POST['dp_grupo'])); $sangre = $this->_db->real_escape_string(trim($_POST['dp_tipo_sangre'])); $email = $this->_db->real_escape_string(trim($_POST['dp_email'])); $tel = $this->_db->real_escape_string(trim($_POST['dp_tel']));
+            $nom = $this->_db->real_escape_string( trim($_POST['dp_nombre'] ) ); $ap = $this->_db->real_escape_string( trim($_POST['dp_ap_paterno'] ) ); $am = $this->_db->real_escape_string( trim($_POST['dp_ap_materno'] ) );
+            $edad = $this->_db->real_escape_string(trim($_POST['dp_edad'])); $talla = $this->_db->real_escape_string(trim($_POST['fm_talla'])); $peso = $this->_db->real_escape_string(trim($_POST['fm_peso'])); $sex = $this->_db->real_escape_string(trim($_POST['dp_sexo']));
+            $car = $this->_db->real_escape_string(trim($_POST['dp_carrera'])); $gpo = $this->_db->real_escape_string(trim($_POST['dp_grupo'])); $sangre = $this->_db->real_escape_string(trim($_POST['dp_tipo_sangre'])); $email = $this->_db->real_escape_string(trim($_POST['dp_email']));
+            $tel = $this->_db->real_escape_string(trim($_POST['dp_tel']));
+
             if ($caracq = $this->_db->prepare($carac)) {
                 $caracq->bind_param('sssssisssisddiss', $noCon, $nom, $ap, $am, $sex, $edad, $email, $car, $gpo, $tel, $sangre, $talla, $peso, $set, $pass, $img );
                 $caracq->execute();
@@ -2391,22 +2395,27 @@
             $dp_trabajo_madre = $this->_db->real_escape_string( trim($_POST['trabMtext']));
             $dp_profecion_madre = $this->_db->real_escape_string( trim($_POST['ProfMa']));
             $dp_dom_madre = $this->_db->real_escape_string( trim($_POST['DomMa']));
-            $padres = "REPLACE INTO alumnos_datos_padres  (id_alumno, dp_nom_padre, dp_apep_padre, dp_apem_padre, dp_edad_padre, dp_tel_padre, dp_trabajo_padre, dp_profecion_padre, dp_dom_padre, dp_nom_madre, dp_apep_madre, dp_apem_madre, dp_edad_madre, dp_tel_madre, dp_trabajo_madre, dp_profecion_madre, dp_dom_madre) VALUES (
-                    ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            $padr =false;
-            if($padresq = $this->_db->prepare($padres)){
-                $padresq->bind_param('sssssisssssssisss', $noCon, $dp_nom_padre, $dp_apep_padre, $dp_apem_padre, $dp_edad_padre, $dp_tel_padre, $dp_trabajo_padre, $dp_profecion_padre, $dp_dom_padre, $dp_nom_madre, $dp_apep_madre, $dp_apem_madre, $dp_edad_madre, $dp_tel_madre, $dp_trabajo_madre, $dp_profecion_madre, $dp_dom_madre );
-                $padresq->execute();
-                if($this->_db->affected_rows > 0){
-                    $padr = true;
-                }else{
-                    echo json_encode(['error' => true , 'text'=>$ret. $this->_db->error . ' ' . $this->_db->errno."padres".$noCon ]);
+            if ($dp_nom_padre != "" && $dp_nom_madre != "") {
+                $padres = "REPLACE INTO alumnos_datos_padres  (id_alumno, dp_nom_padre, dp_apep_padre, dp_apem_padre, dp_edad_padre, dp_tel_padre, dp_trabajo_padre, dp_profecion_padre, dp_dom_padre, dp_nom_madre, dp_apep_madre, dp_apem_madre, dp_edad_madre, dp_tel_madre, dp_trabajo_madre, dp_profecion_madre, dp_dom_madre) VALUES (
+                        ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                $padr =false;
+                if($padresq = $this->_db->prepare($padres)){
+                    $padresq->bind_param('sssssisssssssisss', $noCon, $dp_nom_padre, $dp_apep_padre, $dp_apem_padre, $dp_edad_padre, $dp_tel_padre, $dp_trabajo_padre, $dp_profecion_padre, $dp_dom_padre, $dp_nom_madre, $dp_apep_madre, $dp_apem_madre, $dp_edad_madre, $dp_tel_madre, $dp_trabajo_madre, $dp_profecion_madre, $dp_dom_madre );
+                    $padresq->execute();
+                    if($this->_db->affected_rows > 0){
+                        $padr = true;
+                    }else{
+                        echo json_encode(['error' => true , 'text'=>$ret. $this->_db->error . ' ' . $this->_db->errno."padres".$noCon ]);
+                        exit;
+                    }
+                }
+                else{
+                    echo json_encode(['error' => true , 'text'=>$ret. $this->_db->error . ' ' . $this->_db->errno."padres"]);
                     exit;
                 }
             }
             else{
-                echo json_encode(['error' => true , 'text'=>$ret. $this->_db->error . ' ' . $this->_db->errno."padres"]);
-                exit;
+                $padr = true;
             }
 
             #Ficha perfil
@@ -2481,7 +2490,8 @@
                     echo json_encode(['error' => true , 'text'=>$ret. $this->_db->error . ' ' . $this->_db->errno."famili", 'cfamili'=>$famili]);
                     exit;
                 }
-            } else {
+            }
+            else {
                 echo json_encode(['error' => true, 'text' => $ret . $this->_db->error . ' ' . $this->_db->errno."famili", 'preparefamili' => $famili]);
                 exit;
             }
@@ -2500,11 +2510,13 @@
                 $socialq->execute();
                 if($this->_db->affected_rows > 0){
                     $soci = true;
-                } else {
+                }
+                else {
                     echo json_encode(['error' => true , 'text'=>$ret. $this->_db->error . ' ' . $this->_db->errno, 'soci'=>$social]);
                     exit;
                 }
-            } else {
+            }
+            else {
                     echo json_encode(['error' => true , 'text'=>$ret. $this->_db->error . ' ' . $this->_db->errno, 'preparesocial'=>$social]);
                     exit;
                 }
@@ -2515,11 +2527,11 @@
             $name=""; $sex=""; $esc=0; $pare = 0; $act=''; $naci='0000-00-00';
             $famili2 = "INSERT INTO fiden_familiares (no_control, fi_fa_nombre, fi_fa_fecnac, fi_fa_sex, fi_fa_escolaridad, fi_fa_parentesco, fi_fa_actitud)
             VALUES (?,?,?,?,?,?,?)";
-            if (count($_POST['namef'])>=1) {
+            $err = true; $er=0;
+            if (count($_POST['namef'])>1) {
                 if ($Fami2 = $this->_db->prepare($famili2)) {
 
                     $Fami2->bind_param('ssssiis',$noCon,$name,$naci,$sex,$esc,$pare,$act);
-                    $err = true; $er=0;
                     for ($i=0; $i < count($_POST['namef']); $i++)  {
                         $name = $_POST['namef'][$i];
                         $naci = $_POST['nacf'][$i];
@@ -2538,23 +2550,38 @@
                             }
                         }
                     }
-                    if ($err == true) {
-                        echo json_encode(['error' => true, 'er' => "Error en execute familiarisisisisi". count($_POST['namef']) . $this->_db->error]);
-                        $fam2 = false;
-
-                    } elseif($er>0) {
-                        echo json_encode(['error' => true, 'er' => "Error en prepare" . $this->_db->errno]);
-                        $fam2 = false;
-
-                    }else {
+                }
+            }
+            else{
+                if ($Fami2 = $this->_db->prepare($famili2)) {
+                    $Fami2->bind_param('ssssiis',$noCon,$name,$naci,$sex,$esc,$pare,$act);
+                    $name = $nom." ".$ap." ".$am;
+                    $naci = $_POST['fip_fecha_nac'];
+                    $sex = $this->_db->real_escape_string(trim($_POST['dp_sexo']));
+                    $esc = 7;
+                    $pare = 11;
+                    $act = "";
+                    if (!$Fami2->execute()) {
+                        echo $this->_db->error;
+                        $er++;
+                    } else {
+                        $err = false;
                         $fam2 = true;
 
                     }
                 }
             }
-            //else{
-            //       echo json_encode(['error' => true, 'er' => "Error en execute familiar" . $this->_db->error]);
-            //}
+            if ($err == true) {
+                echo json_encode(['error' => true, 'er' => "Error en execute familiar". count($_POST['namef']) . $this->_db->error]);
+                $fam2 = false;
+            }
+            elseif($er>0) {
+                echo json_encode(['error' => true, 'er' => "Error en prepare" . $this->_db->errno]);
+                $fam2 = false;
+            }
+            else {
+                $fam2 = true;
+            }
             if ($caracterizacion == true && $padr ==true &&$perl == true && $medic == true && $fam == true && $soci == true && $fam2 == true) {
                 echo json_encode(['error' => false]);
             } else {
@@ -3349,7 +3376,7 @@
         }
 
         public function elimFam($nuF){
-            $this->_db->query("DELETE FROM fiden_familiares WHERE no_control = $nuF");
+            $this->_db->query("DELETE FROM fiden_familiares WHERE no_control = '$nuF'");
             if($this->_db->affected_rows>0){
                 return true;
             }else {
@@ -3378,16 +3405,17 @@
                         $arch=true;
                     }
                     $this->_sql="UPDATE alumnos_caracterizacion SET al_pdf ='".$user.".".$tip[1]."' WHERE se_no_control='$user'";
+                    print_r($this->_sql);
                     $resultado = $this->_db->query($this->_sql);
                     if($this->_db->affected_rows > 0){
                         $sql=true;
                     }
 
                     if ($arch==true && $sql=true) {
-                        echo json_encode( array("error"=>false, "men"=>"Se guardo correctamente la la Ficha de Identificaciòn "));
+                        echo json_encode( array("error"=>false, "men"=>"Se guardo correctamente la Ficha de Identificación "));
                     }
                     else{
-                        echo json_encode( array("error"=>true, "men"=>"Hubo algun problema al subir la la Ficha de Identificaciòn "));
+                        echo json_encode( array("error"=>true, "men"=>"Hubo algún problema al subir la Ficha de Identificación "));
                     }
                 }
             }
