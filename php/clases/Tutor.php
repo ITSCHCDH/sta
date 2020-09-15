@@ -81,7 +81,7 @@ class tutor{
         if($resultado->num_rows > 0){
             echo '<option selected="selected" disabled="disabled">Grupos</option>';
             while ($row=$resultado->fetch_assoc()) {
-                echo "<option value='".$row['gpo_nombre']."' ".(($ban==1) ? "onClick='ActTab();'": "" ).">".$row['gpo_nombre']."</option>";
+                echo "<option value='".$row['gpo_nombre']."' >".$row['gpo_nombre']."</option>";
             }
         }
         else {
@@ -107,7 +107,7 @@ class tutor{
             ORDER BY L.alu_NumControl";
 
         $stmt = sqlsrv_query ( $this->_db2, $this->_sql) or die('Query failed: '.$this->_sql);
-        echo "<table class='display' id='mitabla'>
+        echo "<table class='display table table-striped table-border>' id='AlumnosTabla'>
             <thead>
                 <tr>
                     <th>#</th>

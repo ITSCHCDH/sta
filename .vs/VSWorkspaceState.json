@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Driver SQL\\sqlserverPHP",
+    "\\Alumnos",
+    "\\assets\\js",
     "\\php",
     "\\php\\clases"
   ],

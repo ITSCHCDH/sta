@@ -177,35 +177,41 @@
                         </div>
                         <div class="panel-body">
                             <form id="form_editUser_img" class="form-horizontal" enctype="multipart/form-data">
-                                <fieldset>
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label" for="img">Foto de Perfil</label>
-                                        <div class="col-md-9 input-group image-preview">
-                                            <input id="img" type="text" class="form-control image-preview-filename" disabled="disabled" style="margin-left: 20px;">
-                                            <!-- don't give a name === doesn't send on POST/GET -->
-                                            <span class="input-group-btn" style="margin-right: : 20px;">
-                                        <!-- image-preview-clear button -->
-                                        <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
-                                            <span class="glyphicon glyphicon-remove"></span> Limpiar
-                                            </button>
-                                            <!-- image-preview-input -->
-                                            <div class="btn btn-default image-preview-input">
-                                                <span class="glyphicon glyphicon-folder-open"></span>
-                                                <span class="image-preview-input-title">Buscar</span>
-                                                <input type="file" accept="image/jpeg image/jpg image/gif image/png" name="perfil" id="perfil" required/>
-                                                <!-- rename it -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="control-label" for="img">Foto de Perfil</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <div class=" input-group image-preview">
+                                                        <input id="img" type="text" class="form-control image-preview-filename" disabled="disabled" style="margin-left: 20px;">
+                                                        <!-- don't give a name === doesn't send on POST/GET -->
+                                                        <span class="input-group-btn" style="margin-right: : 20px;">
+                                                            <!-- image-preview-clear button -->
+                                                            <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                                                                <span class="glyphicon glyphicon-remove"></span> Limpiar
+                                                            </button>
+                                                            <!-- image-preview-input -->
+                                                            <div class="btn btn-default image-preview-input">
+                                                                <span class="glyphicon glyphicon-folder-open"></span>
+                                                                <span class="image-preview-input-title">Buscar</span>
+                                                                <input type="file" accept="image/jpeg image/jpg image/gif image/png" name="perfil" id="perfil" required/>
+                                                                <!-- rename it -->
+                                                            </div>
+                                                        </span>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            </span>
                                         </div>
                                     </div>
-
-                                    <!-- Button -->
-                                    <div class="form-group pull-right">
-                                        <button type="button" id="cl" class="btn btn-primary" onclick="$('#perfil').show('slow'); $('#Editar_img').hide('slow');">Cancelar</button>
-                                        <button type="submit" id="otp" class="btn btn-primary">Enviar</button>
-                                    </div>
-
-                                </fieldset>
+                                </div>
+                                <!-- Button -->
+                                <div class="form-group pull-right" style="display: block;margin: auto;">
+                                    <button type="button" id="cl" class="btn btn-danger" onclick="$('#perfil').show('slow'); $('#Editar_img').hide('slow');">Cancelar</button>
+                                    <button type="submit" id="otp" class="btn btn-primary">Enviar</button>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -258,7 +264,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary" onClick="$('#formChangePass').submit();"> Cambiar contraseña </button>
                     </div>
                 </div>

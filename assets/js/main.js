@@ -98,9 +98,7 @@ $(document).ready(function() {
 
     $(window).bind('scroll', function() {
         var navHeight = $("#box1").height();
-        ($(window).scrollTop() > navHeight) ?
-        $('nav').addClass('goToTop').addClass('nav-2'):
-            $('nav').removeClass('goToTop').removeClass('nav-2');
+        ($(window).scrollTop() > navHeight + 20) ? $('nav').addClass('goToTop').addClass('nav-2'): $('nav').removeClass('goToTop').removeClass('nav-2');
     });
 
     $(".submenu > a").click(function(e) {
@@ -993,9 +991,10 @@ jQuery(document).on('submit', '#form_AluAcept', function(event) {
                     $('body').loadingModal('destroy');
                 }, 10000);
             } else {
-                myFunctionClose(res.text);
-                $('#error').empty();
-                $('#error').append(res.text);
+                myFunctionClose("Existieron algunos problemas favor de contactar con el area de sistemas");
+                console.log(res.text);
+                //$('#error').empty();
+                //$('#error').append(res.text);
             }
 
             myFunction();
@@ -1003,8 +1002,8 @@ jQuery(document).on('submit', '#form_AluAcept', function(event) {
         .fail(function(resp) {
             console.log(resp.responseText);
             myFunctionClose(resp.responseText);
-            $('#error').empty();
-            $('#error').append(resp.responseText);
+            //$('#error').empty();
+            //$('#error').append(resp.responseText);
         })
         .always(function() {
             console.log("complete");
@@ -1186,11 +1185,7 @@ jQuery(document).on('submit', '#formSegi', function(event) {
         .done(function(respuesta) {
             if (!respuesta.error) {
                 sendMessageR('Se agrego el seguimiento al alumno.', '#00ff00');
-                setTimeout(function() {
-                    $('#aluSeg').modal('hide');
-                    location.reload();
-                }, 5000);
-
+                $('#aluSeg').modal('hide');
             } else {
                 sendMessageR('Algo salio mal vuelva a intentar.', '#DA0000');
             }
