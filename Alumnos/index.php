@@ -425,7 +425,7 @@
                 if ($('input[name=fip_per_vivienda]').is(':checked')) { todoBien = false; window.location.href='#nump'; sendMessageR('Introduce un numero de las personas con las que vives', "#DA0000"); $("#fip_per_vivienda").focus(); }
                 if ($('#fip_per_parentesco').val() === "") { todoBien = false; window.location.href='#nump'; sendMessageR('Describe el parentescon con las personas que vives actualemente', "#DA0000"); $("#fip_per_parentesco").focus(); }
 
-                if (($("input [name='nomPa']").val()!= "" &&  $("input [name='nomMa']").val()!= "") && $('#fip_rel_padres').val() === "") { todoBien = false; window.location.href='#relPad'; sendMessageR('Debe seleccionar la relacion de tus padres', "#DA0000"); $("#fip_rel_padres").focus(); }
+                if (($("input [name='nomPa']").val()== "" &&  $("input [name='nomMa']").val()== "") && $('#fip_rel_padres').val() === "") { todoBien = false; window.location.href='#relPad'; sendMessageR('Debe seleccionar la relacion de tus padres', "#DA0000"); $("#fip_rel_padres").focus(); }
 
                 if (todoBien ==true) {
                     current_step = $(this).parent();
