@@ -746,27 +746,31 @@
                                     <div class="col-sm-4">
                                         <div class="form-group bs-float-label">
                                             <input type="number" class="form-control float-input" id="fm_talla" placeholder="Estatura" value="'.$fm_talla. '" name="fm_talla" step="0.01" required>
-                                            <label for="fm_talla" class="float-label">Estatura</label>
+                                            <label for="fm_talla" class="float-label">Estatura <sub>m</sub></label>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group bs-float-label">
                                             <input type="number" class="form-control float-input" id="fm_peso" placeholder="Peso" value="'.$fm_peso. '" name="fm_peso" step="0.01" required>
-                                            <label for="fm_peso" class="float-label">Peso</label>
+                                            <label for="fm_peso" class="float-label">Peso <sub>kg</sub></label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="form-group bs-float-label">
-                                            <input type="text" class="form-control float-input" id="dp_sexo" placeholder="Sexo" value="'.$dp_sexo. '" name="dp_sexo" required>
+                                            <select id="dp_sexo" name="dp_sexo" class="form-control float-input" required>
+                                                <option value="">Seleccione una Opcion</option>
+                                                <option value="H"'.($dp_sexo=="H"? "selected": "").'>Hombre</option>
+                                                <option value="M"'.($dp_sexo=="M"? "selected": "").'>Mujer</option>
+                                            </select>
                                             <label for="dp_sexo" class="float-label">Sexo</label>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group bs-float-label">
                                             <select class="form-control float-input" id="dp_tipo_sangre" name="dp_tipo_sangre" required>
-                                                <option disabled>Seleccione un tipo de sangre</option>';
+                                                <option value="" disabled>Seleccione un tipo de sangre</option>';
                                                 $tipSan= array("A+","A-","B+","B-","AB+","AB-","O+","O-");
                                                 foreach ($tipSan as  $value) {
                                                     if (strcasecmp($value, $dp_tipo_sangre) == 0)  {
@@ -800,7 +804,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group bs-float-label">
-                                            <input type="text" class="form-control float-input" id="dp_grupo" placeholder="Grupo" value="'.$dp_grupo.'" name="dp_grupo" required>
+                                            <input maxlength="6" type="text" class="form-control float-input" id="dp_grupo" placeholder="Grupo" value="'.$dp_grupo.'" name="dp_grupo" required>
                                             <label for="dp_grupo" class="float-label">Grupo</label>
                                         </div>
                                     </div>
@@ -1541,6 +1545,8 @@
                                                             <option value="5">Secundaria completa</option>
                                                             <option value="6">Media Superior</option>
                                                             <option value="7">Superior</option>
+                                                            <option value="8">Maestria</option>
+                                                            <option value="9">Doctorado</option>
                                                         </select>
                                                     </td>
                                                     <td data-name="parefam">
@@ -1599,8 +1605,8 @@
                                                                         array('value' => "5", 'text' =>"Secundaria completa"),
                                                                         array('value' => "6", 'text' =>"Medio Superior"),
                                                                         array('value' => "7", 'text' =>"Superior"),
-                                                                        array('value' => "7", 'text' =>"Maestria"),
-                                                                        array('value' => "7", 'text' =>"Doctorado"),
+                                                                        array('value' => "8", 'text' =>"Maestria"),
+                                                                        array('value' => "9", 'text' =>"Doctorado"),
                                                             );
                                                             foreach ($edufa as $value) {
                                                                 if ($value['value']==$row['fi_fa_escolaridad']) {
@@ -1716,7 +1722,9 @@
                                                             <option value="4">Secundaria incompleta</option>
                                                             <option value="5">Secundaria completa</option>
                                                             <option value="6">Media Superior</option>
-                                                            <option value="7">Superior</option>
+                                                            <option value="7">Superior</option>                                                            
+                                                            <option value="8">Maestria</option>
+                                                            <option value="9">Doctorado</option>
                                                         </select>
                                                     </td>
                                                     <td data-name="parefam">
@@ -2345,7 +2353,28 @@
 
         public function saveFichaAlu($noCon){
             //var_dump($_POST);
+            $this->_sql="SELECT
+                *
+                FROM
+                alumnos_caracterizacion
+                WHERE
+                alumnos_caracterizacion.se_no_control = '$noCon'";
 
+            if (!$resultado=$this->_db->query($this->_sql)) {
+                // ¡Oh, no! La consulta falló.
+                echo "Lo sentimos, este sitio web está experimentando problemas.";
+                // De nuevo, no hacer esto en un sitio público, aunque nosotros mostraremos
+                // cómo obtener información del error
+                echo "Error: La ejecución de la consulta falló debido a: \n";
+                echo "Query: " . $this->_sql . "\n";
+                echo "Errno: " . $this->_db->errno . "\n";
+                echo "Error: " . $this->_db->error . "\n";
+                exit;
+            }
+            $bandera= false;
+            if ($resultado->num_rows > 0) {
+                $bandera = true;
+            }
 
             $img = $_SESSION['usuario']['img'];
             $pass = $_SESSION['usuario']['pd'];
@@ -2353,8 +2382,6 @@
             $ret="";
 
             #Caracterizacion
-            $carac = "REPLACE INTO sta.alumnos_caracterizacion(se_no_control, dp_nombre, dp_ap_paterno, dp_ap_materno, dp_sexo, dp_edad, dp_email, dp_carrera, dp_grupo, dp_tel, dp_tipo_sangre, fm_talla, fm_peso, dp_pass_cambio, dp_contrasena, al_img)
-            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
             $caracterizacion =false;
             $nom = $this->_db->real_escape_string( trim($_POST['dp_nombre'] ) ); $ap = $this->_db->real_escape_string( trim($_POST['dp_ap_paterno'] ) ); $am = $this->_db->real_escape_string( trim($_POST['dp_ap_materno'] ) );
@@ -2362,23 +2389,31 @@
             $car = $this->_db->real_escape_string(trim($_POST['dp_carrera'])); $gpo = $this->_db->real_escape_string(trim($_POST['dp_grupo'])); $sangre = $this->_db->real_escape_string(trim($_POST['dp_tipo_sangre'])); $email = $this->_db->real_escape_string(trim($_POST['dp_email']));
             $tel = $this->_db->real_escape_string(trim($_POST['dp_tel']));
 
-            if ($caracq = $this->_db->prepare($carac)) {
-                $caracq->bind_param('sssssisssisddiss', $noCon, $nom, $ap, $am, $sex, $edad, $email, $car, $gpo, $tel, $sangre, $talla, $peso, $set, $pass, $img );
-                $caracq->execute();
-                if($this->_db->affected_rows > 0){
-                    $caracterizacion = true;
-                }else{
-                $caracterizacion = true;
+            if (!$bandera) {
+                $carac = "REPLACE INTO sta.alumnos_caracterizacion(se_no_control, dp_nombre, dp_ap_paterno, dp_ap_materno, dp_sexo, dp_edad, dp_email, dp_carrera,
+                    dp_grupo, dp_tel, dp_tipo_sangre, fm_talla, fm_peso, dp_pass_cambio, dp_contrasena, al_img)
+                    VALUES (?,?,?,?,?,?,?,?,?,?,?,".$talla.",".$peso.",?,?,?)";
+                if ($caracq = $this->_db->prepare($carac)) {
+                    $caracq->bind_param('sssssisssisiss', $noCon, $nom, $ap, $am, $sex, $edad, $email, $car, $gpo, $tel, $sangre, $set, $pass, $img );
+                    $caracq->execute();
+
+                    if($this->_db->affected_rows > 0){
+                        $caracterizacion = true;
+                    }else{
+                        $caracterizacion = false;
+                    }
+                }
+                else{
+                    echo json_encode(['error' => true, 'text' => $this->_db->error . ' ' . $this->_db->errno, 'preparecara' => "REPLACE INTO sta.alumnos_caracterizacion(se_no_control, dp_nombre, dp_ap_paterno, dp_ap_materno, dp_sexo, dp_edad, dp_email, dp_carrera, dp_tel, dp_tipo_sangre, fm_talla, fm_peso)
+                    VALUES ('$noCon', '$nom', '$ap', '$am', '$sex', '$edad', '$email', '$car', '$sangre', '$tel', '$talla', '$peso')"]);
+                    exit;
                 }
             }
-            else{
-                echo json_encode(['error' => true, 'text' => $this->_db->error . ' ' . $this->_db->errno, 'preparecara' => "REPLACE INTO sta.alumnos_caracterizacion(se_no_control, dp_nombre, dp_ap_paterno, dp_ap_materno, dp_sexo, dp_edad, dp_email, dp_carrera, dp_tel, dp_tipo_sangre, fm_talla, fm_peso)
-                VALUES ('$noCon', '$nom', '$ap', '$am', '$sex', '$edad', '$email', '$car', '$sangre', '$tel', '$talla', '$peso')"]);
-                exit;
-                }
-
+            else {
+                $this->_sql="UPDATE sta.alumnos_caracterizacion SET dp_sexo='$sex', dp_edad=$edad, dp_email='$email', dp_carrera='$car', dp_grupo='$gpo', dp_tel='$tel', dp_tipo_sangre='$sangre', fm_talla=$talla, fm_peso=$peso, dp_pass_cambio=$set, dp_contrasena='$pass', al_img='$img' WHERE se_no_control='$noCon'";
+                $resultado = $this->_db->query($this->_sql);$caracterizacion = true;
+            }
             #padres
-            #
             $dp_nom_padre = $this->_db->real_escape_string( trim($_POST['nomPa']));
             $dp_apep_padre = $this->_db->real_escape_string( trim($_POST['apPa']));
             $dp_apem_padre = $this->_db->real_escape_string( trim($_POST['amPa']));
@@ -2442,9 +2477,7 @@
                 if($this->_db->affected_rows > 0){
                     $perl = true;
                 }else{
-                    echo json_encode(['error' => true , 'text'=>$ret. $this->_db->error . ' ' . $this->_db->errno."perfil"
-
-                    , 'cara'=>$perfil]);
+                    echo json_encode(['error' => true , 'text'=>$ret. $this->_db->error . ' ' . $this->_db->errno."perfil", 'cara'=>$perfil]);
                     exit;
                 }
             }
@@ -2585,7 +2618,7 @@
             if ($caracterizacion == true && $padr ==true &&$perl == true && $medic == true && $fam == true && $soci == true && $fam2 == true) {
                 echo json_encode(['error' => false]);
             } else {
-                echo json_encode(['error' => true, 'text' => $ret . $this->_db->error . ' ' . $this->_db->errno, 'cara' => $carac, 'medic' => $medic, 'per' => $perfil, 'famtext' => $famili, 'soc' => $social]);
+                echo json_encode(['error' => true, 'text' => $ret . $this->_db->error . ' ' . $this->_db->errno]);
             }
 
         }
@@ -2603,6 +2636,8 @@
                 alumnos_caracterizacion.dp_sexo,
                 alumnos_caracterizacion.dp_carrera,
                 alumnos_caracterizacion.dp_grupo,
+                alumnos_caracterizacion.tut_trabajo_lugar,
+                alumnos_caracterizacion.tut_trabajo_horario,
                 fiden_perfil.fip_edo_civil,
                 alumnos_caracterizacion.dp_tipo_sangre,
                 fiden_perfil.fip_fecha_nac,
@@ -2738,7 +2773,7 @@
                                             Sexo:
                                         </dt>
                                         <dd>
-                                            '.$row['dp_sexo'].'
+                                            '.($row['dp_sexo']=='M'?"Mujer": "Hombre").'
                                         </dd>
                                     </dl>
                                 </div>
@@ -3395,7 +3430,8 @@
                 $tip=explode("/", $tipo);
 
                 if ($tipo != 'application/pdf' ) {
-                    echo "Error, el archivo no es un pdf";
+                    echo json_encode( array("error"=>true, "men"=>"Error, el archivo no es un pdf"));
+                    exit;
                 }
                 else {
                     $src = $carpeta.$user.".".$tip[1];
@@ -3405,7 +3441,6 @@
                         $arch=true;
                     }
                     $this->_sql="UPDATE alumnos_caracterizacion SET al_pdf ='".$user.".".$tip[1]."' WHERE se_no_control='$user'";
-                    print_r($this->_sql);
                     $resultado = $this->_db->query($this->_sql);
                     if($this->_db->affected_rows > 0){
                         $sql=true;
@@ -3442,12 +3477,21 @@
             }
             if ($resultado->num_rows > 0) {
                 $row = $resultado->fetch_assoc();
-                echo '<div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-2 toppad">
-                            <h2>Puedes ver tu antigua ficha aqui</h2>'.
-                            '<a class="btn btn-primary view-pdf" download="'.$no.'.pdf" href="/sta/pdf/'.$row['al_pdf'].'">Ver PDF</a>
-                        </div>
-                    </div>';
+                if ($row['al_pdf'] != "") {
+                    echo '<div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-2 toppad">
+                                <h2>Puedes ver tu antigua ficha aqui</h2>'.
+                                '<a class="btn btn-primary view-pdf" download="'.$no.'.pdf" href="/sta/pdf/'.$row['al_pdf'].'">Ver PDF</a>
+                            </div>
+                        </div>';
+                }
+                else {
+                    echo '<div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-2 toppad">
+                                <h2>No has subido ninguna ficha aun</h2>
+                            </div>
+                        </div>';
+                }
             }else {
                 echo '<div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-2 toppad">
