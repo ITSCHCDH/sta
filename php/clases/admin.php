@@ -816,7 +816,7 @@ require_once $_SERVER["DOCUMENT_ROOT"]."/sta/php/dbconfig.php";
                     dbo.alumnos.alu_apematerno
                     FROM dbo.Alumnos
                     WHERE	dbo.Alumnos.alu_StatusAct = 'VI'
-                    AND dbo.Alumnos.alu_AnioIngreso =2019";
+                    AND dbo.Alumnos.alu_AnioIngreso =".date("Y");
             if ($stmt = sqlsrv_query ( $this->_db2, $nCon) ){
                 while ($rowS = sqlsrv_fetch_array($stmt)){
                     $this->_sql="SELECT
