@@ -50,7 +50,11 @@
                 }
                 echo "
                     <fieldset>
+                        <div class='row'>
+                            <div class='col-md-12 col-sm-6'>
                                 <img src='/sta/assets/images/".(isset($row['al_img'])?'Alu/'.$row['al_img']:'itsch.png')."' alt='FOTOALUMNO' class='img-responsive'>
+                            </div>
+                            <div class='col-md-12 col-sm-6'>
                                 <b>NO. CONTROL:</b> ".$row['se_no_control']."<br>
                                 <br>
                                 <b>NOMBRE DEL ALUMNO:</b> ".$row['NombreCompleto']."<br>
@@ -65,7 +69,9 @@
                                 <br>
                                 <b>GRUPO:</b> ".(isset($_GET['Grupo'])? $_GET['Grupo']:'')."<br>
                                 <br>
-                            </fieldset>
+                            </div>
+                        </div>
+                    </fieldset>
                 ";
             }
             else{
@@ -81,21 +87,27 @@
                     }
                     echo "
                         <fieldset>
-                            <img src='/sta/assets/images/avatar1_small.jpg' alt='FOTOALUMNO' class='img-responsive'>
-                            <b>NO. CONTROL:</b> ".$row['alu_NumControl']."<br>
-                            <br>
-                            <b>NOMBRE DEL ALUMNO:</b> ".$row['alu_Nombre']." ".$row['alu_ApePaterno']." ".$row['alu_ApeMaterno']."<br>
-                            <br>
-                            <b>SEXO:</b> ".$Sexo."<br>
-                            <br>
-                            <b>CORREO:</b> <br>
-                            <br>
-                            <b>SEMESTRE:</b> ".$row['alu_SemestreAct']."<br>
-                            <br>
-                            <b>CARRERA:</b> ".$row['Car']."<br>
-                            <br>
-                            <b>GRUPO:</b> ".$_GET['Grupo']."<br>
-                            <br>
+                            <div class='row'>
+                                <div class='col-md-12 col-sm-6'>
+                                    <img src='/sta/assets/images/avatar1_small.jpg' alt='FOTOALUMNO' class='img-responsive'>
+                                </div>
+                                <div class='col-md-12 col-sm-6'>
+                                    <b>NO. CONTROL:</b> ".$row['alu_NumControl']."<br>
+                                    <br>
+                                    <b>NOMBRE DEL ALUMNO:</b> ".$row['alu_Nombre']." ".$row['alu_ApePaterno']." ".$row['alu_ApeMaterno']."<br>
+                                    <br>
+                                    <b>SEXO:</b> ".$Sexo."<br>
+                                    <br>
+                                    <b>CORREO:</b> <br>
+                                    <br>
+                                    <b>SEMESTRE:</b> ".$row['alu_SemestreAct']."<br>
+                                    <br>
+                                    <b>CARRERA:</b> ".$row['Car']."<br>
+                                    <br>
+                                    <b>GRUPO:</b> ".$_GET['Grupo']."<br>
+                                    <br>
+                                </div>
+                            </div>
                         </fieldset>
                     ";
             }
@@ -177,12 +189,9 @@
                         if ($ban===true) {
                             if (is_numeric($Cal[$i][$j])) {
                                 if ($Cal[$i][$j]<=69) {
-                                    $mot=$this->getMotivos($i, $Materias[$j][1], $_GET['NoCon']);
+                                    $mot=$this->getMotivos($i+1, $Materias[$j][1], $_GET['NoCon']);
                                     if (!is_null($mot) && !is_null($mot[0]) ) {
-                                        if (!is_null($mot[1]))
-                                            echo "<td class='danger' data-tooltip='".$mot[1]."'>".utf8_encode($Cal[$i][$j])."</td>";
-                                        else
-                                            echo "<td class='danger' data-tooltip='".$mot[0]."'>".utf8_encode($Cal[$i][$j])."</td>";
+                                        echo "<td class='danger' data-tooltip='".$mot[0]."'>".utf8_encode($Cal[$i][$j])."</td>";
                                     }
                                     else {
                                         echo "<td class='danger' data-tooltip='En espera'>".utf8_encode($Cal[$i][$j])."</td>";
@@ -213,7 +222,7 @@
                         if ($ban===true) {
                             if (is_numeric($Cal[$i][$j])) {
                                 if ($Cal[$i][$j]<=69) {
-                                    $mot=$this->getMotivos($i, $Materias[$j][1]);
+                                    $mot=$this->getMotivos($i+1, $Materias[$j][1], $_GET['NoCon']);
                                     if (!is_null($mot) && !is_null($mot[0]) ) {
                                         echo "<td class='danger' data-tooltip='".$mot[0]."'>".utf8_encode($Cal[$i][$j])."</td>";
                                     }
@@ -288,7 +297,7 @@
                 $com1='Sin Visitas';        $clas1='info';
                 $com2='Sin Visitas';        $clas2='info';
                 $com4='Aun sin realizar';   $clas4='info';
-                $com5='No liverado';        $clas5=$_GET['NoCon']<5?'info':'danger';
+                $com5='No liberado';        $clas5=$_GET['NoCon']<5?'info':'danger';
             }
             $com3 = $this->calGnr($_GET['NoCon']);   $clas3 = ($val3>=90&&$val3<=100? 'info': ($val3>=80&&$val3<=89? 'success': ($val3>=70&&$val3<=79? 'warning': 'danger' )));
 
@@ -310,7 +319,7 @@
                 echo "<table class='table table-condensed table-hover table-striped' style='font-size:20px;'>
                         <thead>
                             <tr>
-                                No hay semesestres anteriores
+                                No hay semestres anteriores
                             </tr>
                         </thead>
                     </table>";
@@ -576,7 +585,10 @@
 
                 if ($resultado->num_rows > 0) {
                     $row = $resultado->fetch_assoc();
-                    return array($row['mot_re_nombre'], $row['gpro_cal_otro']);
+                    return array($row['Motre'], $row['gpro_cal_otro']);
+                }
+                else{
+                    return array("En Espera","");
                 }
             }
         }

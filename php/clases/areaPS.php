@@ -208,6 +208,7 @@ class ps{
         $this->_sql="SELECT
             grupos_tutorias.gpo_clave,
             grupos_tutorias.gpo_nombre,
+            grupos_tutorias.cat_clave,
             catedratico_datos_personales.cat_Nombre,
             catedratico_datos_personales.cat_ApePat,
             catedratico_datos_personales.cat_ApeMat,
@@ -232,10 +233,10 @@ class ps{
                     <td>".$row['gpo_identificador']."</td>
                     <td>".$row['cat_Nombre']." ".$row['cat_ApePat']." ".$row['cat_ApeMat']."</td>
                     <td>";
-                    echo '<button type="button" class="btn btn-danger btn-sm"
-                            onclick="TU_edit_asign(\''.$row['gpo_clave'].'\',\''.$row['gpo_identificador'].'\');">
-                            Cambiar Asesor
-                        </button>
+                    echo '<div class="btn-group mr-2" role="group" aria-label="First group">
+                            <button type="button" class="btn btn-success btn-sm" onclick="TU_edit_asign(\''.$row['gpo_clave'].'\',\''.$row['gpo_identificador'].'\');" ><span aria-hidden="true" class="glyphicon glyphicon-pencil"></span></button>
+                            <button type="button" class="btn btn-danger btn-sm" onclick="GPO_Eliminar(\''.$row['gpo_clave'].'\',\''.$row['gpo_identificador'].'\', \''.$row['cat_Nombre']." ".$row['cat_ApePat']." ".$row['cat_ApeMat'].'\');"><span aria-hidden="true" class=" glyphicon glyphicon-remove"></span></button>
+                        </div>
                     </td>
                 </tr>';
             }
@@ -332,6 +333,16 @@ class ps{
         }
     }
 
+    public function GPO_sup($gpo){
+        $this->_sql = "DELETE FROM sta.grupos_tutorias WHERE gpo_clave = $gpo";
+
+        if( $this->_db->query($this->_sql)){
+            echo json_encode(['err'=> false,'text' => 'Los datos han sido eliminados correctamente.', 'class'=> "alert-success alert-dismissable" ]);
+        }else{
+            echo json_encode(['err'=> true,'text' => "Error, no se pudo eliminar los datos.", 'class'=> "alert-warning alert-dismissable" ]);
+        }
+    }
+
     public function Tutor_reg(){
         $user = mysqli_real_escape_string($this->_db,(strip_tags($_POST['clavcat'], ENT_QUOTES)));
 
@@ -405,6 +416,64 @@ class ps{
             echo '<option selected="selected" disabled="disabled">'.sqlsrv_num_rows($stmt).'</option>';
         }
     }
+
+    function listar_alumnosFormatos($car, $gen){
+            echo
+                "<table class='display table' id='mitabla'>
+                    <thead>
+                        <tr>
+                            <th style='width:3%;' >#</th>
+                            <th style='width:15%;' >NumControl</th>
+                            <th style='' >Nombre</th>
+                            <th style='' >Caracterizado</th>
+                            <th style='width:20%;' >Ficha PDF</th>
+                        </tr>
+                    </thead>
+                    <tbody>";
+            $this->_sql = "SELECT
+                dbo.Alumnos.alu_NumControl AS alu_no_control
+                FROM dbo.Alumnos
+                WHERE	dbo.Alumnos.alu_StatusAct = 'VI'
+                AND dbo.Alumnos.car_Clave = ".$car."
+                AND dbo.Alumnos.alu_AnioIngreso =".$gen;
+                $stmts = sqlsrv_query ( $this->_db2, $this->_sql) or die('Query failed: '.$this->_sql);
+
+                $alumnos= array();
+            if ($stmts != false) {
+                $con=1;
+                while ($row = sqlsrv_fetch_array($stmts)) {
+                     if ($mres=$this->_db->query("SELECT alumnos_caracterizacion.dp_nombre,alumnos_caracterizacion.dp_ap_paterno, alumnos_caracterizacion.dp_ap_materno, alumnos_caracterizacion.dp_carrera, alumnos_caracterizacion.al_pdf, alumnos_caracterizacion.al_pdf_valido FROM alumnos_caracterizacion WHERE alumnos_caracterizacion.se_no_control ='". $row['alu_no_control']."'")){
+                        if ($mres->num_rows >0) {
+                            $mrow = $mres->fetch_assoc();
+                            echo
+                           "<tr>
+                                <td>".$con."</td>
+                                <td>".$row['alu_no_control']."</td>
+                                <td><a target='blank' href='PerfilAlumno.php?NoCon=".$row['alu_no_control']."'>".$mrow['dp_ap_paterno']." ".$mrow['dp_ap_materno']." ".$mrow['dp_nombre']."</a></td>
+                                <td>Si</td>
+                                <td>".(isset($mrow['al_pdf'])?'<a class="btn btn-primary view-pdf" download="'.$row['alu_no_control'].'.pdf" href="/sta/pdf/'.$mrow['al_pdf'].'">Ver PDF</a>':'')."   </td>
+
+                            </tr>";
+                        }
+                        else {
+                            if($stmt = sqlsrv_query($this->_db2, "SELECT a.alu_NumControl AS NoControl, a.alu_Nombre AS Nombre, a.alu_ApePaterno AS ApePaterno, a.alu_ApeMaterno AS ApeMaterno, a.alu_SemestreAct AS Sem, c.car_Nombre AS Carrera FROM dbo.Alumnos AS a JOIN dbo.Carreras AS c ON a.car_Clave = c.car_Clave WHERE A.alu_NumControl ='" .$row['alu_no_control']."'") ) {
+                                $srow = sqlsrv_fetch_array($stmt);
+                                echo
+                                   "<tr>
+                                        <td>".$con."</td>
+                                        <td>".$row['alu_no_control']."</td>
+                                        <td><a target='blank' href='PerfilAlumno.php?NoCon=".$row['alu_no_control']."'>".$srow['ApePaterno']." ".$srow['ApeMaterno']." ".$srow['Nombre']."</a></td>
+                                        <td>No</td>
+                                        <td></td>
+                                    </tr>";
+                            }
+                        }
+                    }$con+=1;
+                }
+            }
+            echo"</tbody>
+                </table>";
+        }
 }
 
 ?>

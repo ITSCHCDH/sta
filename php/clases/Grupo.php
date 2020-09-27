@@ -717,7 +717,7 @@ require_once $_SERVER["DOCUMENT_ROOT"]."/sta/php/dbconfig.php";
                     }
                     else {
                         if($stmt = sqlsrv_query($this->_db2, "SELECT a.alu_NumControl AS NoControl, a.alu_Nombre AS Nombre, a.alu_ApePaterno AS ApePaterno, a.alu_ApeMaterno AS ApeMaterno, a.alu_SemestreAct AS Sem, c.car_Nombre AS Carrera FROM dbo.Alumnos AS a JOIN dbo.Carreras AS c ON a.car_Clave = c.car_Clave WHERE A.alu_NumControl ='" .$num."' AND a.alu_StatusAct = 'VI'") ) {
-                            $row_count = sqlsrv_num_rows($stmt);
+                            $row_count = sqlsrv_has_rows ($stmt);
 
                             if ($row_count === false) {
                                 echo json_encode(['error' => true, 'men' => "El Alumno no se encuentra registrado o esta dado de baja"]);
@@ -738,6 +738,8 @@ require_once $_SERVER["DOCUMENT_ROOT"]."/sta/php/dbconfig.php";
         }
 
         function insertarAlumno(){
+            
+
             $this->_sql="INSERT INTO grupos_tutorias_complemento(alu_no_control,gpo_clave)
                 values('".$_POST['control']."',(SELECT grupos_tutorias.gpo_clave FROM grupos_tutorias WHERE grupos_tutorias.gpo_nombre = '".$_POST['gpo']."') )";
             if(!$resultado=$this->_db->query($this->_sql)){

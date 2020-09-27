@@ -25,7 +25,7 @@
     require_once $_SERVER["DOCUMENT_ROOT"].'/sta/php/clases/areaPS.php';
     $PS = new ps();
  ?>
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -35,7 +35,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <!-- css -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="/sta/assets/css/style.css" rel="stylesheet" />
     <?php echo "<script>var pass='".$_SESSION['usuario']['passw']."'; var userT='".$_SESSION['usuario']['Tipo']."'; var user='".$_SESSION['usuario']['Clave']."'; </script>";
@@ -47,10 +48,12 @@
     <!-- box1 -->
     <div id="box1" class="row home">
         <div class="col-md-6 col-sm-6">
-            <a href="index.php"><img src="/sta/assets/images/CABECERA.PNG" class="img-responsive izquierda ciento20" alt="Responsive image"></a>
+            <a href="index.php"><img src="/sta/assets/images/CABECERA.PNG" class="img-responsive izquierda ciento20"
+                    alt="Responsive image"></a>
         </div>
         <div class="col-md-6 col-sm-6">
-            <a href="http://www.itsch.edu.mx/"><img src="/sta/assets/images/itsch.png" class="img-responsive derecha ciento20" alt="Responsive image"></a>
+            <a href="http://www.itsch.edu.mx/"><img src="/sta/assets/images/itsch.png"
+                    class="img-responsive derecha ciento20" alt="Responsive image"></a>
         </div>
     </div>
     <!-- /box1 -->
@@ -62,9 +65,9 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-main">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                 </button>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
 
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse-main">
@@ -72,7 +75,9 @@
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="profile-ava">
-                                <img alt="" src="/sta/assets/images/<?php echo $_SESSION['usuario']['img']? 'Users/'.$_SESSION['usuario']['img']:'avatar1_small.jpg'; ?>" style="width:33px;">
+                                <img alt=""
+                                    src="/sta/assets/images/<?php echo $_SESSION['usuario']['img']? 'Users/'.$_SESSION['usuario']['img']:'avatar1_small.jpg'; ?>"
+                                    style="width:33px;">
                             </span>
                             <span class="username"><?php echo $_SESSION['usuario']['Nombre']; ?></span>
                             <b class="caret"></b>
@@ -92,13 +97,13 @@
                     <li><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
                     <li><a href="carreras.php">Carreras</a></li>
                     <li><a href="adminTutor.php">Administrar Tutores</a></li>
-                    <li class="active"><a href="#">Asignar Grupos</a></li>
+                    <li><a href="Formatos.php">Formatos</a></li>
                 </ul>
             </div>
         </div>
     </nav>
     <!-- /navbar -->
-    <div class="alert text-center" id="alert_msg" ></div>
+    <div class="alert text-center" id="alert_msg"></div>
     <!--  -->
     <div class="container cuerpo">
         <ol class="breadcrumb">
@@ -107,10 +112,13 @@
         </ol>
 
         <div class="" style="padding-left: 0 !important;">
-            <center><h1>Administracion de tutores</h1></center>
+            <center>
+                <h1>Administracion de tutores</h1>
+            </center>
             <div class="panel-heading" style="height:30px;">
                 <div class="pull-right">
-                    <button type="button" data-toggle="modal" data-target="#asingGroup" class="btn btn-primary center-block">Agregar</button>
+                    <button type="button" data-toggle="modal" data-target="#asingGroup"
+                        class="btn btn-primary center-block">Agregar</button>
                 </div>
                 <div class="panel-title">Área de Tutorías</div>
             </div>
@@ -146,30 +154,32 @@
             <div class="modal-content">
                 <form id="form_AltaGrupoTutor" method="post">
                     <div class="modal-header" style="background:#428bca ;">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                                class="sr-only">Close</span></button>
                         <h3 class="modal-title" id="lineModalLabel">Asignar Grupos</h3>
                     </div>
                     <div class="modal-body">
                         <!-- content goes here -->
                         <div class="form-group">
                             <label for="nomcat">Asesor</label>
-                            <input type="text" class="form-control" id="nomcat" placeholder="Nombre" name="nombre" list="catedraticos">
+                            <input type="text" class="form-control" id="nomcat" placeholder="Nombre" name="nombre"
+                                list="catedraticos">
                             <datalist id="catedraticos">
                                 <?php $PS->tutores(); ?>
                             </datalist>
                             <input type="hidden" name="clavcat" value="" id="clavcat">
                         </div>
-                        <div class="form-group" >
+                        <div class="form-group">
                             <label for="Carreras" class="col-sm-2 control-label">Carrera</label>
                             <select class="form-control" id="Carreras" name="carrera" required>
                                 <option selected="selected" disabled="disabled">-Elija la carrera-</option>
-                                <option value="06">INGENIERIA BIOQUIMICA</option>
-                                <option value="38">INGENIERIA EN GESTION EMPRESARIAL</option>
-                                <option value="16">INGENIERIA INDUSTRIAL</option>
-                                <option value="35">INGENIERIA MECATRONICA</option>
-                                <option value="NANO">INGENIERIA NANOTECNOLOGIA</option>
-                                <option value="07">INGENIERIA EN SISTEMAS COMPUTACIONALES</option>
-                                <option value="TICS">INGENIERIA EN TECNOLOGIAS DE LA INFORMACION Y COMUNICACION</option>
+                                <option value="06">INGENIERÍA BIOQUÍMICA</option>
+                                <option value="38">INGENIERÍA EN GESTIÓN EMPRESARIAL</option>
+                                <option value="16">INGENIERÍA INDUSTRIAL</option>
+                                <option value="35">INGENIERÍA MACARRÓNICA</option>
+                                <option value="NANO">INGENIERÍA NANOTECNOLOGIA</option>
+                                <option value="07">INGENIERÍA EN SISTEMAS COMPUTACIONES</option>
+                                <option value="TICS">INGENIERÍA EN TECNOLOGÍAS DE LA INFORMACIÓN Y COMUNICACIÓN</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -189,13 +199,16 @@
                     <div class="modal-footer">
                         <div class="btn-group btn-group-justified" role="group" aria-label="group button">
                             <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal" role="button">Cerrar</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                    role="button">Cerrar</button>
                             </div>
                             <div class="btn-group btn-delete hidden" role="group">
-                                <button type="button" id="delImage" class="btn btn-warning" data-dismiss="modal" role="button">Delete</button>
+                                <button type="button" id="delImage" class="btn btn-warning" data-dismiss="modal"
+                                    role="button">Delete</button>
                             </div>
                             <div class="btn-group" role="group">
-                                <button type="button"  class="btn btn-primary " id="gpo_save" role="button">Guardar</button>
+                                <button type="button" class="btn btn-primary " id="gpo_save"
+                                    role="button">Guardar</button>
                             </div>
                         </div>
                     </div>
@@ -208,35 +221,109 @@
             <div class="modal-content">
                 <form id="form_EditGrupoTutor" method="post">
                     <div class="modal-header" style="background:#428bca ;">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                        <h3 class="modal-title" id="lineModalLabel">Editar el grupo</h3>
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                                class="sr-only">Close</span></button>
+                        <h3 class="modal-title" id="lineModalLabel">Editar el asesor</h3>
                     </div>
                     <div class="modal-body">
                         <!-- content goes here -->
                         <div class="form-group">
                             <label for="nomcat">Asesor</label>
-                            <input type="text" class="form-control" id="nomcatEdit" placeholder="Nombre" name="nombre" list="catedraticos">
+                            <input type="text" class="form-control" id="nomcatEdit" placeholder="Nombre" name="nombre"
+                                list="catedraticos">
                             <datalist id="catedraticosEdit">
                                 <?php $PS->tutores(); ?>
                             </datalist>
                             <input type="hidden" name="clavcatEdit" value="" id="clavcatEdit">
                         </div>
-                        <div class="form-group" >
+                        <div class="form-group">
                             <label for="grupEdit" class="col-sm-2 control-label">Grupo</label>
-                            <input type="text" name="grupoEdit" value="" id="grupEdit" class="form-control" placeholder="Grupo">
-                            <input type="hidden" name="idGrupoEdit" value="" id="idGrupEdit" class="form-control" placeholder="Grupo">
+                            <input type="text" name="grupoEdit" value="" id="grupEdit" class="form-control"
+                                placeholder="Grupo" readonly>
+                            <input type="hidden" name="idGrupoEdit" value="" id="idGrupEdit" class="form-control"
+                                placeholder="Grupo">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <div class="btn-group btn-group-justified" role="group" aria-label="group button">
                             <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal" role="button">Cerrar</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                    role="button">Cerrar</button>
                             </div>
                             <div class="btn-group btn-delete hidden" role="group">
-                                <button type="button" id="delImage" class="btn btn-warning" data-dismiss="modal" role="button">Delete</button>
+                                <button type="button" id="delImage" class="btn btn-warning" data-dismiss="modal"
+                                    role="button">Delete</button>
                             </div>
                             <div class="btn-group" role="group">
-                                <button type="button"  class="btn btn-primary " id="gpoE_save" role="button">Guardar</button>
+                                <button type="button" class="btn btn-primary " id="gpoE_save"
+                                    role="button">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="editGroup2" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" style=" margin: 100px auto;">
+            <div class="modal-content">
+                <form id="form_AltaGrupoTutor" method="post">
+                    <div class="modal-header" style="background:#428bca ;">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                                class="sr-only">Close</span></button>
+                        <h3 class="modal-title" id="lineModalLabel">Editar Grupo</h3>
+                    </div>
+                    <div class="modal-body">
+                        <!-- content goes here -->
+                        <div class="form-group">
+                            <label for="nomcat">Asesor</label>
+                            <input type="text" class="form-control" id="Snomcat" placeholder="Nombre" name="nombre"
+                                list="Scatedraticos">
+                            <datalist id="Scatedraticos">
+                                <?php $PS->tutores(); ?>
+                            </datalist>
+                            <input type="hidden" name="clavcat" value="" id="clavcat">
+                        </div>
+                        <div class="form-group">
+                            <label for="Carreras" class="col-sm-2 control-label">Carrera</label>
+                            <select class="form-control" id="SCarreras" name="carrera" required>
+                                <option selected="selected" disabled="disabled">-Elija la carrera-</option>
+                                <option value="06">INGENIERÍA BIOQUÍMICA</option>
+                                <option value="38">INGENIERÍA EN GESTIÓN EMPRESARIAL</option>
+                                <option value="16">INGENIERÍA INDUSTRIAL</option>
+                                <option value="35">INGENIERÍA MACARRÓNICA</option>
+                                <option value="NANO">INGENIERÍA NANOTECNOLOGIA</option>
+                                <option value="07">INGENIERÍA EN SISTEMAS COMPUTACIONES</option>
+                                <option value="TICS">INGENIERÍA EN TECNOLOGÍAS DE LA INFORMACIÓN Y COMUNICACIÓN</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="Semestre" class="col-sm-2 control-label">Semestre</label>
+                            <select class="form-control" id="SSemestre" name="semestre" required>
+                                <?php
+                                    require_once $_SERVER["DOCUMENT_ROOT"].'/sta/php/Semestre.php';
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="Grupo" class="col-sm-2 control-label">Grupo</label>
+                            <select class="form-control Grupo" id="SGrupo" name="Grupo">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                    role="button">Cerrar</button>
+                            </div>
+                            <div class="btn-group btn-delete hidden" role="group">
+                                <button type="button" id="delImage" class="btn btn-warning" data-dismiss="modal"
+                                    role="button">Delete</button>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-primary " id="gpo_save"
+                                    role="button">Guardar</button>
                             </div>
                         </div>
                     </div>
@@ -251,7 +338,8 @@
             <div class="container">
                 <div class="row" id="derechos">
                     <p class=" text-center text-muted">
-                    Av. Ing. Carlos Rojas Gutiérrez 2120 | Fraccionamiento Valle de la Herradura | Ciudad Hidalgo Michoacán | Tel. (786) 154-90-00
+                        Av. Ing. Carlos Rojas Gutiérrez 2120 | Fraccionamiento Valle de la Herradura | Ciudad Hidalgo
+                        Michoacán | Tel. (786) 154-90-00
                     </p>
                     <p class=" text-center text-muted">
                         Copyright © 2017. Todos los Derechos Reservados
@@ -264,29 +352,62 @@
 
     <!-- js -->
     <script src="/sta/assets/js/jquery.js" charset="utf-8"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+    </script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="/sta/assets/js/main.js"></script>
     <script type="text/javascript">
-        $(document).ready(function(){
-            $('#mitabla').DataTable({
-                "order": [[2, "asc"]],
-                "language":{
+    $(document).ready(function() {
+        $('#mitabla').DataTable({
+            "order": [
+                [2, "asc"]
+            ],
+            "language": {
                 "lengthMenu": "Mostrar _MENU_ registros por pagina",
                 "info": "Mostrando pagina _PAGE_ de _PAGES_",
-                    "infoEmpty": "No hay registros disponibles",
-                    "infoFiltered": "(filtrada de _MAX_ registros)",
-                    "loadingRecords": "Cargando...",
-                    "processing":     "Procesando...",
-                    "search": "Buscar:",
-                    "zeroRecords":    "No se encontraron registros coincidentes",
-                    "paginate": {
-                        "next":       "Siguiente",
-                        "previous":   "Anterior"
-                    },
-                }
-            });
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtrada de _MAX_ registros)",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "No se encontraron registros coincidentes",
+                "paginate": {
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                },
+            }
         });
+    });
+
+    function GPO_Eliminar(id, nom, cat) {
+        var opcion = confirm("Desea eliminar el grupo  " + nom + " asignado a " + cat);
+        if (opcion == true) {
+            jQuery
+                .ajax({
+                    url: "/sta/php/init/GPO_Eliminar.php",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        gpo: id,
+                    },
+                })
+                .done(function(res) {
+                    sendMessageR(res.text, res.class);
+                    if (res.err == false) {
+                        setTimeout(function() {
+                            location.reload();
+                        }, 3000);
+                    }
+                })
+                .fail(function(resp) {
+                    console.log(resp.responseText);
+                })
+                .always(function() {
+                    console.log("complete");
+                });
+        }
+    }
     </script>
 </body>
 

@@ -90,6 +90,8 @@
                     <li class="active"><a href="#">Carreras</a></li>
                     <li><a href="adminTutor.php">Administrar Tutores</a></li>
                     <li><a href="asing.php">Asignar Grupos</a></li>
+                    <li><a href="Formatos.php">Formatos</a></li>
+
                 </ul>
             </div>
         </div>
@@ -109,13 +111,13 @@
                     <label for="PScarrera" class="col-sm-2 control-label">Carreras</label>
                     <select class="form-control" id="PScarrera" name="PScarrera" required>
                         <option selected="selected" disabled="disabled">-Elija la carrera-</option>
-                        <option value="6">INGENIERIA BIOQUIMICA</option>
-                        <option value="7">INGENIERIA EN GESTION EMPRESARIAL</option>
-                        <option value="2">INGENIERIA INDUSTRIAL</option>
-                        <option value="5">INGENIERIA MECATRONICA</option>
-                        <option value="10">INGENIERIA NANOTECNOLOGIA</option>
-                        <option value="3">INGENIERIA EN SISTEMAS COMPUTACIONALES</option>
-                        <option value="9">INGENIERIA EN TECNOLOGIAS DE LA INFORMACION Y COMUNICACION</option>
+                        <option value="6">INGENIERÍA BIOQUÍMICA</option>
+                        <option value="7">INGENIERÍA EN GESTIÓN EMPRESARIAL</option>
+                        <option value="2">INGENIERÍA INDUSTRIAL</option>
+                        <option value="5">INGENIERÍA MACARRÓNICA</option>
+                        <option value="10">INGENIERÍA NANOTECNOLOGIA</option>
+                        <option value="3">INGENIERÍA EN SISTEMAS COMPUTACIONES</option>
+                        <option value="9">INGENIERÍA EN TECNOLOGÍAS DE LA INFORMACIÓN Y COMUNICACIÓN</option>
                     </select>
                 </div>
             </div>

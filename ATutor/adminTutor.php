@@ -93,6 +93,8 @@
                     <li><a href="carreras.php">Carreras</a></li>
                     <li class="active"><a href="#">Administrar Tutores</a></li>
                     <li><a href="asing.php">Asignar Grupos</a></li>
+                    <li><a href="Formatos.php">Formatos</a></li>
+
                 </ul>
             </div>
         </div>

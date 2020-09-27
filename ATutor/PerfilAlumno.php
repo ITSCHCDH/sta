@@ -109,8 +109,8 @@
                     <li><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
                     <li><a href="carreras.php">Carreras</a></li>
                     <li><a href="adminTutor.php">Administrar Tutores</a></li>
-
                     <li><a href="asing.php">Asignar Grupos</a></li>
+                    <li><a href="Formatos.php">Formatos</a></li>
                 </ul>
             </div>
         </div>
