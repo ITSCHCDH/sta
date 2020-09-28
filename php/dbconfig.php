@@ -18,11 +18,6 @@
     define("MS_DB_USER", "sista");
     //define("MS_DB_USER", "sa");  //Para pruebas
     define("MS_DB_PASS", "Sta_2019$");
-
-
-    //define("MS_DB_PASS", "Adminooapas!"); //Para pruebas
-    //define("MS_DB_PASS", "12345"); //Para pruebas
-   
     define("MS_DB_NAME", "CONTROL_ESCOLAR");
 
 ?>
