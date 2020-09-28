@@ -9,7 +9,7 @@
  Dual licensed: GPL v2 and MIT, see texts at http://opensource.org/licenses/
 */
 
-$ACCESS_PWD=''; #!!!IMPORTANT!!! this is script access password, SET IT if you want to protect you DB from public access
+$ACCESS_PWD='Rmx2030$#'; #!!!IMPORTANT!!! this is script access password, SET IT if you want to protect you DB from public access
 
 #DEFAULT db connection settings
 # --- WARNING! --- if you set defaults - it's recommended to set $ACCESS_PWD to protect your db!
@@ -266,205 +266,406 @@ function print_header(){
 ?>
 <!DOCTYPE html>
 <html>
-<head><title>phpMiniAdmin</title>
-<meta charset="utf-8">
-<style type="text/css">
-*{box-sizing:border-box;}
-body{font-family:Arial,sans-serif;font-size:80%;padding:0;margin:0}
-div{padding:3px}
-pre{font-size:125%}
-textarea{width:100%}
-.nav{text-align:center}
-.ft{text-align:right;margin-top:20px;font-size:smaller}
-.inv{background-color:#069;color:#FFF}
-.inv a{color:#FFF}
-table{border-collapse:collapse}
-table.res{width:100%}
-table.wa{width:auto}
-table.res th,table.res td{padding:2px;border:1px solid #fff;vertical-align:top}
-table.sm th,table.sm td{max-width:30em}
-table.sm th>div,table.sm td>div{max-height:3.5em;overflow:hidden}
-table.sm th.lg,table.sm td.lg{max-width:inherit}
-table.sm th.lg>div,table.sm td.lg>div{max-height:inherit;overflow:inherit}
-table.restr{vertical-align:top}
-tr.e{background-color:#CCC}
-tr.o{background-color:#EEE}
-tr.e:hover, tr.o:hover{background-color:#FF9}
-tr.h{background-color:#99C}
-tr.s{background-color:#FF9}
-.err{color:#F33;font-weight:bold;text-align:center}
-.frm{width:400px;border:1px solid #999;background-color:#eee;text-align:left}
-.frm label .l{width:100px;float:left}
-.dot{border-bottom:1px dotted #000}
-.ajax{text-decoration:none;border-bottom: 1px dashed}
-.qnav{width:30px}
-.sbtn{width:100px}
-.clear{clear:both;height:0;display:block}
-.pi a{text-decoration:none}
-.pi hr{display:none}
-.pi img{float:right}
-.pi .center{text-align:center}
-.pi table{margin:0 auto}
-.pi table td, .pi table th{border:1px solid #000000;text-align:left;vertical-align:baseline}
-.pi table .e{background-color:#ccccff;font-weight:bold}
-.pi table .v{background-color:#cccccc}
-</style>
 
-<script type="text/javascript">
-var LSK='pma_',LSKX=LSK+'max',LSKM=LSK+'min',qcur=0,LSMAX=32;
+<head>
+    <title>phpMiniAdmin</title>
+    <meta charset="utf-8">
+    <style type="text/css">
+    * {
+        box-sizing: border-box;
+    }
 
-function $(i){return document.getElementById(i)}
-function frefresh(){
- var F=document.DF;
- F.method='get';
- F.refresh.value="1";
- F.GoSQL.click();
-}
-function go(p,sql){
- var F=document.DF;
- F.p.value=p;
- if(sql)F.q.value=sql;
- F.GoSQL.click();
-}
-function ays(){
- return confirm('Are you sure to continue?');
-}
-function chksql(){
- var F=document.DF,v=F.qraw.value;
- if(/^\s*(?:delete|drop|truncate|alter)/.test(v)) if(!ays())return false;
- if(lschk(1)){
-  var lsm=lsmax()+1,ls=localStorage;
-  ls[LSK+lsm]=v;
-  ls[LSKX]=lsm;
-  //keep just last LSMAX queries in log
-  if(!ls[LSKM])ls[LSKM]=1;
-  var lsmin=parseInt(ls[LSKM]);
-  if((lsm-lsmin+1)>LSMAX){
-   lsclean(lsmin,lsm-LSMAX);
-  }
- }
- return true;
-}
-function tc(tr){
- if (tr.className=='s'){
-  tr.className=tr.classNameX;
- }else{
-  tr.classNameX=tr.className;
-  tr.className='s';
- }
-}
-function lschk(skip){
- if (!localStorage || !skip && !localStorage[LSKX]) return false;
- return true;
-}
-function lsmax(){
- var ls=localStorage;
- if(!lschk() || !ls[LSKX])return 0;
- return parseInt(ls[LSKX]);
-}
-function lsclean(from,to){
- ls=localStorage;
- for(var i=from;i<=to;i++){
-  delete ls[LSK+i];ls[LSKM]=i+1;
- }
-}
-function q_prev(){
- var ls=localStorage;
- if(!lschk())return;
- qcur--;
- var x=parseInt(ls[LSKM]);
- if(qcur<x)qcur=x;
- $('qraw').value=ls[LSK+qcur];
-}
-function q_next(){
- var ls=localStorage;
- if(!lschk())return;
- qcur++;
- var x=parseInt(ls[LSKX]);
- if(qcur>x)qcur=x;
- $('qraw').value=ls[LSK+qcur];
-}
-function after_load(){
- var F=document.DF;
- var p=F['v[pwd]'];
- if (p) p.focus();
- qcur=lsmax();
+    body {
+        font-family: Arial, sans-serif;
+        font-size: 80%;
+        padding: 0;
+        margin: 0
+    }
 
- F.addEventListener('submit',function(e){
-  if(!F.qraw)return;
-  if(!chksql()){e.preventDefault();return}
-  $('q').value=btoa(encodeURIComponent($('qraw').value).replace(/%([0-9A-F]{2})/g,function(m,p){return String.fromCharCode('0x'+p)}));
- });
- var res=$('res');
- if(res)res.addEventListener('dblclick',function(e){
-  if(!$('is_sm').checked)return;
-  var el=e.target;
-  if(el.tagName!='TD')el=el.parentNode;
-  if(el.tagName!='TD')return;
-  if(el.className.match(/\b\lg\b/))el.className=el.className.replace(/\blg\b/,' ');
-  else el.className+=' lg';
- });
-}
-function logoff(){
- if(lschk()){
-  var ls=localStorage;
-  var from=parseInt(ls[LSKM]),to=parseInt(ls[LSKX]);
-  for(var i=from;i<=to;i++){
-   delete ls[LSK+i];
-  }
-  delete ls[LSKM];delete ls[LSKX];
- }
-}
-function cfg_toggle(){
- var e=$('cfg-adv');
- e.style.display=e.style.display=='none'?'':'none';
-}
-function qtpl(s){
- $('qraw').value=s.replace(/%T/g,'`<?php echo $_REQUEST['t']?b64d($_REQUEST['t']):'tablename'?>`');
-}
-function smview(){
- if($('is_sm').checked){$('res').className+=' sm'}else{$('res').className = $('res').className.replace(/\bsm\b/,' ')}
-}
-<?php if($is_sht){?>
-function chkall(cab){
- var e=document.DF.elements;
- if (e!=null){
-  var cl=e.length;
-  for (i=0;i<cl;i++){var m=e[i];if(m.checked!=null && m.type=="checkbox"){m.checked=cab.checked}}
- }
-}
-function sht(f){
- document.DF.dosht.value=f;
-}
-<?php }?>
-</script>
+    div {
+        padding: 3px
+    }
+
+    pre {
+        font-size: 125%
+    }
+
+    textarea {
+        width: 100%
+    }
+
+    .nav {
+        text-align: center
+    }
+
+    .ft {
+        text-align: right;
+        margin-top: 20px;
+        font-size: smaller
+    }
+
+    .inv {
+        background-color: #069;
+        color: #FFF
+    }
+
+    .inv a {
+        color: #FFF
+    }
+
+    table {
+        border-collapse: collapse
+    }
+
+    table.res {
+        width: 100%
+    }
+
+    table.wa {
+        width: auto
+    }
+
+    table.res th,
+    table.res td {
+        padding: 2px;
+        border: 1px solid #fff;
+        vertical-align: top
+    }
+
+    table.sm th,
+    table.sm td {
+        max-width: 30em
+    }
+
+    table.sm th>div,
+    table.sm td>div {
+        max-height: 3.5em;
+        overflow: hidden
+    }
+
+    table.sm th.lg,
+    table.sm td.lg {
+        max-width: inherit
+    }
+
+    table.sm th.lg>div,
+    table.sm td.lg>div {
+        max-height: inherit;
+        overflow: inherit
+    }
+
+    table.restr {
+        vertical-align: top
+    }
+
+    tr.e {
+        background-color: #CCC
+    }
+
+    tr.o {
+        background-color: #EEE
+    }
+
+    tr.e:hover,
+    tr.o:hover {
+        background-color: #FF9
+    }
+
+    tr.h {
+        background-color: #99C
+    }
+
+    tr.s {
+        background-color: #FF9
+    }
+
+    .err {
+        color: #F33;
+        font-weight: bold;
+        text-align: center
+    }
+
+    .frm {
+        width: 400px;
+        border: 1px solid #999;
+        background-color: #eee;
+        text-align: left
+    }
+
+    .frm label .l {
+        width: 100px;
+        float: left
+    }
+
+    .dot {
+        border-bottom: 1px dotted #000
+    }
+
+    .ajax {
+        text-decoration: none;
+        border-bottom: 1px dashed
+    }
+
+    .qnav {
+        width: 30px
+    }
+
+    .sbtn {
+        width: 100px
+    }
+
+    .clear {
+        clear: both;
+        height: 0;
+        display: block
+    }
+
+    .pi a {
+        text-decoration: none
+    }
+
+    .pi hr {
+        display: none
+    }
+
+    .pi img {
+        float: right
+    }
+
+    .pi .center {
+        text-align: center
+    }
+
+    .pi table {
+        margin: 0 auto
+    }
+
+    .pi table td,
+    .pi table th {
+        border: 1px solid #000000;
+        text-align: left;
+        vertical-align: baseline
+    }
+
+    .pi table .e {
+        background-color: #ccccff;
+        font-weight: bold
+    }
+
+    .pi table .v {
+        background-color: #cccccc
+    }
+    </style>
+
+    <script type="text/javascript">
+    var LSK = 'pma_',
+        LSKX = LSK + 'max',
+        LSKM = LSK + 'min',
+        qcur = 0,
+        LSMAX = 32;
+
+    function $(i) {
+        return document.getElementById(i)
+    }
+
+    function frefresh() {
+        var F = document.DF;
+        F.method = 'get';
+        F.refresh.value = "1";
+        F.GoSQL.click();
+    }
+
+    function go(p, sql) {
+        var F = document.DF;
+        F.p.value = p;
+        if (sql) F.q.value = sql;
+        F.GoSQL.click();
+    }
+
+    function ays() {
+        return confirm('Are you sure to continue?');
+    }
+
+    function chksql() {
+        var F = document.DF,
+            v = F.qraw.value;
+        if (/^\s*(?:delete|drop|truncate|alter)/.test(v))
+            if (!ays()) return false;
+        if (lschk(1)) {
+            var lsm = lsmax() + 1,
+                ls = localStorage;
+            ls[LSK + lsm] = v;
+            ls[LSKX] = lsm;
+            //keep just last LSMAX queries in log
+            if (!ls[LSKM]) ls[LSKM] = 1;
+            var lsmin = parseInt(ls[LSKM]);
+            if ((lsm - lsmin + 1) > LSMAX) {
+                lsclean(lsmin, lsm - LSMAX);
+            }
+        }
+        return true;
+    }
+
+    function tc(tr) {
+        if (tr.className == 's') {
+            tr.className = tr.classNameX;
+        } else {
+            tr.classNameX = tr.className;
+            tr.className = 's';
+        }
+    }
+
+    function lschk(skip) {
+        if (!localStorage || !skip && !localStorage[LSKX]) return false;
+        return true;
+    }
+
+    function lsmax() {
+        var ls = localStorage;
+        if (!lschk() || !ls[LSKX]) return 0;
+        return parseInt(ls[LSKX]);
+    }
+
+    function lsclean(from, to) {
+        ls = localStorage;
+        for (var i = from; i <= to; i++) {
+            delete ls[LSK + i];
+            ls[LSKM] = i + 1;
+        }
+    }
+
+    function q_prev() {
+        var ls = localStorage;
+        if (!lschk()) return;
+        qcur--;
+        var x = parseInt(ls[LSKM]);
+        if (qcur < x) qcur = x;
+        $('qraw').value = ls[LSK + qcur];
+    }
+
+    function q_next() {
+        var ls = localStorage;
+        if (!lschk()) return;
+        qcur++;
+        var x = parseInt(ls[LSKX]);
+        if (qcur > x) qcur = x;
+        $('qraw').value = ls[LSK + qcur];
+    }
+
+    function after_load() {
+        var F = document.DF;
+        var p = F['v[pwd]'];
+        if (p) p.focus();
+        qcur = lsmax();
+
+        F.addEventListener('submit', function(e) {
+            if (!F.qraw) return;
+            if (!chksql()) {
+                e.preventDefault();
+                return
+            }
+            $('q').value = btoa(encodeURIComponent($('qraw').value).replace(/%([0-9A-F]{2})/g, function(m, p) {
+                return String.fromCharCode('0x' + p)
+            }));
+        });
+        var res = $('res');
+        if (res) res.addEventListener('dblclick', function(e) {
+            if (!$('is_sm').checked) return;
+            var el = e.target;
+            if (el.tagName != 'TD') el = el.parentNode;
+            if (el.tagName != 'TD') return;
+            if (el.className.match(/\b\lg\b/)) el.className = el.className.replace(/\blg\b/, ' ');
+            else el.className += ' lg';
+        });
+    }
+
+    function logoff() {
+        if (lschk()) {
+            var ls = localStorage;
+            var from = parseInt(ls[LSKM]),
+                to = parseInt(ls[LSKX]);
+            for (var i = from; i <= to; i++) {
+                delete ls[LSK + i];
+            }
+            delete ls[LSKM];
+            delete ls[LSKX];
+        }
+    }
+
+    function cfg_toggle() {
+        var e = $('cfg-adv');
+        e.style.display = e.style.display == 'none' ? '' : 'none';
+    }
+
+    function qtpl(s) {
+        $('qraw').value = s.replace(/%T/g, '`<?php echo $_REQUEST['
+            t ']?b64d($_REQUEST['
+            t ']):'
+            tablename '?>`');
+    }
+
+    function smview() {
+        if ($('is_sm').checked) {
+            $('res').className += ' sm'
+        } else {
+            $('res').className = $('res').className.replace(/\bsm\b/, ' ')
+        }
+    } <
+    ? php
+    if ($is_sht) {
+        ? >
+        function chkall(cab) {
+            var e = document.DF.elements;
+            if (e != null) {
+                var cl = e.length;
+                for (i = 0; i < cl; i++) {
+                    var m = e[i];
+                    if (m.checked != null && m.type == "checkbox") {
+                        m.checked = cab.checked
+                    }
+                }
+            }
+        }
+
+        function sht(f) {
+            document.DF.dosht.value = f;
+        } <
+        ? php
+    } ? >
+    </script>
 
 </head>
+
 <body onload="after_load()">
-<form method="post" name="DF" id="DF" action="<?php eo($self)?>" enctype="multipart/form-data">
-<input type="hidden" name="XSS" value="<?php eo($_SESSION['XSS'])?>">
-<input type="hidden" name="refresh" value="">
-<input type="hidden" name="p" value="">
+    <form method="post" name="DF" id="DF" action="<?php eo($self)?>" enctype="multipart/form-data">
+        <input type="hidden" name="XSS" value="<?php eo($_SESSION['XSS'])?>">
+        <input type="hidden" name="refresh" value="">
+        <input type="hidden" name="p" value="">
 
-<div class="inv">
-<a href="http://phpminiadmin.sourceforge.net/" target="_blank"><b>phpMiniAdmin <?php eo($VERSION)?></b></a>
-<?php if ($_SESSION['is_logged'] && $dbh){ ?>
- | <a href="?<?php eo($xurl.'&q='.b64u("show databases"))?>">Databases</a>: <select name="db" onChange="frefresh()"><option value='*'> - select/refresh -</option><option value=''> - show all -</option>
-<?php echo get_db_select($dbn)?></select>
-<?php if($dbn){ $z=" &#183; <a href='".hs($self."?$xurl&db=".ue($dbn)); ?>
-<?php echo $z.'&q='.b64u($SHOW_T)?>'>show tables</a>
-<?php echo $z?>&shex=1'>export</a>
-<?php echo $z?>&shim=1'>import</a>
-<?php } ?>
- | <a href="?showcfg=1">Settings</a>
-<?php } ?>
-<?php if ($_SESSION['is_logged']){?> | <a href="?<?php eo($xurl)?>&logoff=1" onclick="logoff()">Logoff</a> <?php }?>
- | <a href="?pi=1">phpinfo</a>
-</div>
+        <div class="inv">
+            <a href="http://phpminiadmin.sourceforge.net/" target="_blank"><b>phpMiniAdmin <?php eo($VERSION)?></b></a>
+            <?php if ($_SESSION['is_logged'] && $dbh){ ?>
+            | <a href="?<?php eo($xurl.'&q='.b64u("show databases"))?>">Databases</a>: <select name="db"
+                onChange="frefresh()">
+                <option value='*'> - select/refresh -</option>
+                <option value=''> - show all -</option>
+                <?php echo get_db_select($dbn)?>
+            </select>
+            <?php if($dbn){ $z=" &#183; <a href='".hs($self."?$xurl&db=".ue($dbn)); ?>
+            <?php echo $z.'&q='.b64u($SHOW_T)?>'>show tables</a>
+            <?php echo $z?>&shex=1'>export</a>
+            <?php echo $z?>&shim=1'>import</a>
+            <?php } ?>
+            | <a href="?showcfg=1">Settings</a>
+            <?php } ?>
+            <?php if ($_SESSION['is_logged']){?> | <a href="?<?php eo($xurl)?>&logoff=1" onclick="logoff()">Logoff</a>
+            <?php }?>
+            | <a href="?pi=1">phpinfo</a>
+        </div>
 
-<div class="err"><?php eo($err_msg)?></div>
+        <div class="err"><?php eo($err_msg)?></div>
 
-<?php
+        <?php
 }
 
 function print_screen(){
@@ -478,36 +679,45 @@ function print_screen(){
  print_header();
 ?>
 
-<div class="dot" style="padding:3px 20px">
-<label for="qraw">SQL-query (or multiple queries separated by ";"):</label>&nbsp;<button type="button" class="qnav" onclick="q_prev()">&lt;</button><button type="button" class="qnav" onclick="q_next()">&gt;</button><br>
-<textarea id="qraw" cols="70" rows="10"><?php eo($SQLq)?></textarea><br>
-<input type="hidden" name="q" id="q" value="<?php b64e($SQLq);?>">
-<input type="submit" name="GoSQL" value="Go" class="sbtn">
-<input type="button" name="Clear" value=" Clear " onclick="$('qraw').value='';" style="width:100px">
-<?php if(!empty($_REQUEST['db'])){ ?>
-<div style="float:right">
-<input type="button" value="Select" class="sbtn" onclick="qtpl('SELECT *\nFROM %T\nWHERE 1')">
-<input type="button" value="Insert" class="sbtn" onclick="qtpl('INSERT INTO %T (`column`, `column`)\nVALUES (\'value\', \'value\')')">
-<input type="button" value="Update" class="sbtn" onclick="qtpl('UPDATE %T\nSET `column`=\'value\'\nWHERE 1=0')">
-<input type="button" value="Delete" class="sbtn" onclick="qtpl('DELETE FROM %T\nWHERE 1=0')">
-</div><br class="clear">
-<?php } ?>
-</div>
-<div class="dot">
-<div style="float:right;padding:0 15px"><label><input type="checkbox" name="is_sm" value="1" id="is_sm" onclick="smview()" <?php eo($is_sm?'checked':'')?>> compact view</label></div>
-Records: <b><?php eo($reccount); if(!is_null($last_count) && $reccount<$last_count){eo(' out of '.$last_count);}?></b> in <b><?php eo($time_all)?></b> sec<br>
-<b><?php eo($out_message)?></b>
-</div>
-<?php echo $nav.$sqldr.$nav; ?>
-<?php
+        <div class="dot" style="padding:3px 20px">
+            <label for="qraw">SQL-query (or multiple queries separated by ";"):</label>&nbsp;<button type="button"
+                class="qnav" onclick="q_prev()">&lt;</button><button type="button" class="qnav"
+                onclick="q_next()">&gt;</button><br>
+            <textarea id="qraw" cols="70" rows="10"><?php eo($SQLq)?></textarea><br>
+            <input type="hidden" name="q" id="q" value="<?php b64e($SQLq);?>">
+            <input type="submit" name="GoSQL" value="Go" class="sbtn">
+            <input type="button" name="Clear" value=" Clear " onclick="$('qraw').value='';" style="width:100px">
+            <?php if(!empty($_REQUEST['db'])){ ?>
+            <div style="float:right">
+                <input type="button" value="Select" class="sbtn" onclick="qtpl('SELECT *\nFROM %T\nWHERE 1')">
+                <input type="button" value="Insert" class="sbtn"
+                    onclick="qtpl('INSERT INTO %T (`column`, `column`)\nVALUES (\'value\', \'value\')')">
+                <input type="button" value="Update" class="sbtn"
+                    onclick="qtpl('UPDATE %T\nSET `column`=\'value\'\nWHERE 1=0')">
+                <input type="button" value="Delete" class="sbtn" onclick="qtpl('DELETE FROM %T\nWHERE 1=0')">
+            </div><br class="clear">
+            <?php } ?>
+        </div>
+        <div class="dot">
+            <div style="float:right;padding:0 15px"><label><input type="checkbox" name="is_sm" value="1" id="is_sm"
+                        onclick="smview()" <?php eo($is_sm?'checked':'')?>> compact view</label></div>
+            Records:
+            <b><?php eo($reccount); if(!is_null($last_count) && $reccount<$last_count){eo(' out of '.$last_count);}?></b>
+            in <b><?php eo($time_all)?></b> sec<br>
+            <b><?php eo($out_message)?></b>
+        </div>
+        <?php echo $nav.$sqldr.$nav; ?>
+        <?php
  print_footer();
 }
 
 function print_footer(){
 ?>
-</form>
-<div class="ft">&copy; 2004-2017 <a href="http://osalabs.com" target="_blank">Oleg Savchuk</a></div>
-</body></html>
+    </form>
+    <div class="ft">&copy; 2004-2017 <a href="http://osalabs.com" target="_blank">Oleg Savchuk</a></div>
+</body>
+
+</html>
 <?php
 }
 
@@ -515,12 +725,12 @@ function print_login(){
  print_header();
 ?>
 <center>
-<h3>Access protected by password</h3>
-<div style="width:400px;border:1px solid #999999;background-color:#eeeeee">
-<label>Password: <input type="password" name="pwd" value=""></label>
-<input type="hidden" name="login" value="1">
-<input type="submit" value=" Login ">
-</div>
+    <h3>Access protected by password</h3>
+    <div style="width:400px;border:1px solid #999999;background-color:#eeeeee">
+        <label>Password: <input type="password" name="pwd" value=""></label>
+        <input type="hidden" name="login" value="1">
+        <input type="submit" value=" Login ">
+    </div>
 </center>
 <?php
  print_footer();
@@ -532,22 +742,37 @@ function print_cfg(){
  print_header();
 ?>
 <center>
-<h3>DB Connection Settings</h3>
-<div class="frm">
-<label><div class="l">DB user name:</div><input type="text" name="v[user]" value="<?php eo($DB['user'])?>"></label><br>
-<label><div class="l">Password:</div><input type="password" name="v[pwd]" value=""></label><br>
-<div style="text-align:right"><a href="#" class="ajax" onclick="cfg_toggle()">advanced settings</a></div>
-<div id="cfg-adv" style="display:none;">
-<label><div class="l">DB name:</div><input type="text" name="v[db]" value="<?php eo($DB['db'])?>"></label><br>
-<label><div class="l">MySQL host:</div><input type="text" name="v[host]" value="<?php eo($DB['host'])?>"></label> <label>port: <input type="text" name="v[port]" value="<?php eo($DB['port'])?>" size="4"></label><br>
-<label><div class="l">Charset:</div><select name="v[chset]"><option value="">- default -</option><?php echo chset_select($DB['chset'])?></select></label><br>
-<br><label for ="rmb"><input type="checkbox" name="rmb" id="rmb" value="1" checked> Remember in cookies for 30 days or until Logoff</label>
-</div>
-<center>
-<input type="hidden" name="savecfg" value="1">
-<input type="submit" value=" Apply "><input type="button" value=" Cancel " onclick="window.location='<?php eo($self)?>'">
-</center>
-</div>
+    <h3>DB Connection Settings</h3>
+    <div class="frm">
+        <label>
+            <div class="l">DB user name:</div><input type="text" name="v[user]" value="<?php eo($DB['user'])?>">
+        </label><br>
+        <label>
+            <div class="l">Password:</div><input type="password" name="v[pwd]" value="">
+        </label><br>
+        <div style="text-align:right"><a href="#" class="ajax" onclick="cfg_toggle()">advanced settings</a></div>
+        <div id="cfg-adv" style="display:none;">
+            <label>
+                <div class="l">DB name:</div><input type="text" name="v[db]" value="<?php eo($DB['db'])?>">
+            </label><br>
+            <label>
+                <div class="l">MySQL host:</div><input type="text" name="v[host]" value="<?php eo($DB['host'])?>">
+            </label> <label>port: <input type="text" name="v[port]" value="<?php eo($DB['port'])?>"
+                    size="4"></label><br>
+            <label>
+                <div class="l">Charset:</div><select name="v[chset]">
+                    <option value="">- default -</option><?php echo chset_select($DB['chset'])?>
+                </select>
+            </label><br>
+            <br><label for="rmb"><input type="checkbox" name="rmb" id="rmb" value="1" checked> Remember in cookies for
+                30 days or until Logoff</label>
+        </div>
+        <center>
+            <input type="hidden" name="savecfg" value="1">
+            <input type="submit" value=" Apply "><input type="button" value=" Cancel "
+                onclick="window.location='<?php eo($self)?>'">
+        </center>
+    </div>
 </center>
 <?php
  print_footer();
@@ -814,29 +1039,32 @@ function print_export(){
  print_header();
 ?>
 <center>
-<h3>Export <?php eo($l)?></h3>
-<div class="frm">
-<input type="checkbox" name="s" value="1" checked> Structure<br>
-<input type="checkbox" name="d" value="1" checked> Data<br><br>
-<div><label><input type="radio" name="et" value="" checked> .sql</label>&nbsp;</div>
-<div>
-<?php if ($t && !strpos($t,',')){?>
- <label><input type="radio" name="et" value="csv"> .csv (Excel style, data only and for one table only)</label>
-<?php }else{?>
-<label>&nbsp;( ) .csv</label> <small>(to export as csv - go to 'show tables' and export just ONE table)</small>
-<?php }?>
-</div>
-<br>
-<div><label><input type="checkbox" name="sp" value="1"> import has super privileges</label></div>
-<div><label><input type="checkbox" name="gz" value="1"> compress as .gz</label></div>
-<br>
-<input type="hidden" name="doex" value="1">
-<input type="hidden" name="rt" value="<?php eo($t)?>">
-<input type="submit" value=" Download ">
-<input type="submit" name="srv" value=" Dump on Server ">
-<input type="button" value=" Cancel " onclick="window.location='<?php eo($self.'?'.$xurl.'&db='.ue($DB['db']))?>'">
-<p><small>"Dump on Server" exports to file:<br><?php eo(export_fname($DUMP_FILE).'.sql')?></small></p>
-</div>
+    <h3>Export <?php eo($l)?></h3>
+    <div class="frm">
+        <input type="checkbox" name="s" value="1" checked> Structure<br>
+        <input type="checkbox" name="d" value="1" checked> Data<br><br>
+        <div><label><input type="radio" name="et" value="" checked> .sql</label>&nbsp;</div>
+        <div>
+            <?php if ($t && !strpos($t,',')){?>
+            <label><input type="radio" name="et" value="csv"> .csv (Excel style, data only and for one table
+                only)</label>
+            <?php }else{?>
+            <label>&nbsp;( ) .csv</label> <small>(to export as csv - go to 'show tables' and export just ONE
+                table)</small>
+            <?php }?>
+        </div>
+        <br>
+        <div><label><input type="checkbox" name="sp" value="1"> import has super privileges</label></div>
+        <div><label><input type="checkbox" name="gz" value="1"> compress as .gz</label></div>
+        <br>
+        <input type="hidden" name="doex" value="1">
+        <input type="hidden" name="rt" value="<?php eo($t)?>">
+        <input type="submit" value=" Download ">
+        <input type="submit" name="srv" value=" Dump on Server ">
+        <input type="button" value=" Cancel "
+            onclick="window.location='<?php eo($self.'?'.$xurl.'&db='.ue($DB['db']))?>'">
+        <p><small>"Dump on Server" exports to file:<br><?php eo(export_fname($DUMP_FILE).'.sql')?></small></p>
+    </div>
 </center>
 <?php
  print_footer();
@@ -978,20 +1206,22 @@ function print_import(){
  print_header();
 ?>
 <center>
-<h3>Import DB</h3>
-<div class="frm">
-<div><label><input type="radio" name="it" value="" checked> import by uploading <b>.sql</b> or <b>.gz</b> file:</label>
- <input type="file" name="file1" value="" size=40><br>
-</div>
-<div><label><input type="radio" name="it" value="sql"> import from file on server:<br>
- <?php eo($DUMP_FILE.'.sql')?></label></div>
-<div><label><input type="radio" name="it" value="gz"> import from file on server:<br>
- <?php eo($DUMP_FILE.'.sql.gz')?></label></div>
-<input type="hidden" name="doim" value="1">
-<input type="submit" value=" Import " onclick="return ays()"><input type="button" value=" Cancel " onclick="window.location='<?php eo($self.'?'.$xurl.'&db='.ue($DB['db']))?>'">
-</div>
-<br><br><br>
-<!--
+    <h3>Import DB</h3>
+    <div class="frm">
+        <div><label><input type="radio" name="it" value="" checked> import by uploading <b>.sql</b> or <b>.gz</b>
+                file:</label>
+            <input type="file" name="file1" value="" size=40><br>
+        </div>
+        <div><label><input type="radio" name="it" value="sql"> import from file on server:<br>
+                <?php eo($DUMP_FILE.'.sql')?></label></div>
+        <div><label><input type="radio" name="it" value="gz"> import from file on server:<br>
+                <?php eo($DUMP_FILE.'.sql.gz')?></label></div>
+        <input type="hidden" name="doim" value="1">
+        <input type="submit" value=" Import " onclick="return ays()"><input type="button" value=" Cancel "
+            onclick="window.location='<?php eo($self.'?'.$xurl.'&db='.ue($DB['db']))?>'">
+    </div>
+    <br><br><br>
+    <!--
 <h3>Import one Table from CSV</h3>
 <div class="frm">
 .csv file (Excel style): <input type="file" name="file2" value="" size=40><br>
