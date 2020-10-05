@@ -132,43 +132,61 @@
              ?>
             </div>
             <div class='col-md-10 col-lg-9'>
-                <div class='semaforos'>
-                    <h4>SEMÁFOROS</h4>
-                    <table class='table'>
-                        <thead>
-                            <tr>
-                                <th>Medico</th>
-                                <th>Psicología</th>
-                                <th>Calificaciones</th>
-                                <th>Servicio social</th>
-                                <th>Cultura y deporte</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class='active'>
-                                <?php $Alumno1 -> AlumnoSemaforos(); ?>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <hr>
-                <div class='materias'>
-                    <h4>Calificaciones</h4>
-                    <table class='table'>
-                        <?php
-                         $Alumno1 -> AlumnoCalificaciones();
-                      ?>
-                    </table>
-                </div>
-                <hr>
-                <div class='semestre'>
-                    <h4>Semestres</h4>
-                    <?php
-                     $Alumno1 -> AlumnoSemestre($_GET['NoCon']);
-                  ?>
-                </div>
-                <hr>
+                <div>
+                    <div class="bs-example bs-example-tabs" data-example-id="togglable-tabs">
+                        <ul class="nav nav-tabs" id="myTabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab"
+                                    data-toggle="tab" aria-controls="home" aria-expanded="true">STA</a></li>
+                            <li role="presentation" class=""><a href="#profile" role="tab" id="profile-tab"
+                                    data-toggle="tab" aria-controls="profile" aria-expanded="false">Caracterización
+                                    (sabana)</a></li>
 
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade active in" role="tabpanel" id="home" aria-labelledby="home-tab">
+                                <div class='semaforos'>
+                                    <h4>SEMÁFOROS</h4>
+                                    <table class='table'>
+                                        <thead>
+                                            <tr>
+                                                <th>Medico</th>
+                                                <th>Psicología</th>
+                                                <th>Calificaciones</th>
+                                                <th>Servicio social</th>
+                                                <th>Cultura y deporte</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class='active'>
+                                                <?php $Alumno1 -> AlumnoSemaforos(); ?>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <hr>
+                                <div class='materias'>
+                                    <h4>Calificaciones</h4>
+                                    <table class='table'>
+                                        <?php
+                                        $Alumno1 -> AlumnoCalificaciones();
+                                    ?>
+                                    </table>
+                                </div>
+                                <hr>
+                                <div class='semestre'>
+                                    <h4>Semestres</h4>
+                                    <?php
+                                    $Alumno1 -> AlumnoSemestre($_GET['NoCon']);
+                                ?>
+                                </div>
+                                <hr>
+                            </div>
+                            <div class="tab-pane fade" role="tabpanel" id="profile" aria-labelledby="profile-tab">
+                                <?php $Alumno1-> AlumnoSabana($_GET['NoCon']) ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

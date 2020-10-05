@@ -544,6 +544,206 @@
             sqlsrv_free_stmt($stmt);
         }
 
+        public function AlumnoSabana($nu)
+        {
+            $this->_sql="SELECT * FROM alumnos_caracterizacion WHERE se_no_control='$nu'";
+
+            if(!$resultado = $this->_db->query($this->_sql)){
+                // ¡Oh, no! La consulta falló.
+                echo "Lo sentimos, este sitio web está experimentando problemas.";
+
+                // De nuevo, no hacer esto en un sitio público, aunque nosotros mostraremos
+                /* cómo obtener información del error
+                echo "Error: La ejecución de la consulta falló debido a: \n";
+                echo "Query: " . $this->_sql . "\n";
+                echo "Errno: " . $this->_db->errno . "\n";
+                echo "Error: " . $this->_db->error . "\n";
+                exit;*/
+            }
+
+            if($resultado->num_rows > 0){
+                $row = $resultado->fetch_assoc();
+                echo'<div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="Procedencia">Procedencia</label>
+                                <input value="'.$row['se_procedencia_foraneo'].'" readonly type="text" class="form-control" id="Procedencia">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="EscProce">Escuela de procedencia</label>
+                                <input value="'.$row['se_esc_proced'].'" readonly type="text" class="form-control" id="EscProce">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="PromedioBach">Promedio del Bachillerato</label>
+                                <input value="'.$row['se_bachillerato_prom'].'" readonly type="text" class="form-control" id="PromedioBach">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="TipoBach">Tipo de Bachillerato</label>
+                                <input value="'.$row['se_bachillerato_tipo'].'" readonly type="text" class="form-control" id="TipoBach">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="Corrimiento">Corrimiento de listas</label>
+                                <input value="'.$row['sa_corrimiento_listas'].'" readonly type="text" class="form-control" id="Corrimiento">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="CarrTrunca">¿Carrera Trunca?</label>
+                                <input value="'.$row['tut_carrera_trunca'].'" readonly type="text" class="form-control" id="CarrTrunca">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="OpcionTec">Somos Primera Opción o Segunda</label>
+                                <input value="'.$row['tut_opc_esc'].'" readonly type="text" class="form-control" id="OpcionTec">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="ProbPsi">Problemas Psicológicos</label>
+                                <textarea class="form-control" rows="3" id="ProbPsi" readonly>'.$row['tut_probpsico_diagnostico'].'</textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="Enfermedades">Enfermedades</label>
+                                <textarea class="form-control" rows="3" id="Enfermedades" readonly>'.$row['tut_probmed_enf'].'</textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="Adicciones">Adicciones</label>
+                                <textarea class="form-control" rows="3" id="Adicciones" readonly>'.$row['tut_probmed_ad'].'</textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="ProblemasFam">Problemas Familiares</label>
+                                <textarea class="form-control" rows="3" for="ProblemasFam" readonly>'.$row['tut_probfam_res'].'</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="OriVoc">Orientación Vocacional</label>
+                                <input value="'.$row['tut_orient_vocacional'].'" readonly type="text" class="form-control" id="OriVoc">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="Habitos">Hábitos de Estudio</label>
+                                <input value="'.$row['tut_hab_estudio'].'" readonly type="text" class="form-control" id="Habitos">
+                            </div>
+                        </div>
+                    </div>';
+            }
+            else{
+                echo'<div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="Procedencia">Procedencia</label>
+                            <input readonly type="text" class="form-control" id="Procedencia">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="EscProce">Escuela de procedencia</label>
+                            <input readonly type="text" class="form-control" id="EscProce">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="PromedioBach">Promedio del Bachillerato</label>
+                            <input readonly type="text" class="form-control" id="PromedioBach">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="TipoBach">Tipo de Bachillerato</label>
+                            <input readonly type="text" class="form-control" id="TipoBach">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="Corrimiento">Corrimiento de listas</label>
+                            <input readonly type="text" class="form-control" id="Corrimiento">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="CarrTrunca">¿Carrera Trunca?</label>
+                            <input readonly type="text" class="form-control" id="CarrTrunca">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="OpcionTec">Somos Primera Opción o Segunda</label>
+                            <input readonly type="text" class="form-control" id="OpcionTec">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="ProbPsi">Problemas Psicológicos</label>
+                            <textarea class="form-control" rows="3" id="ProbPsi" readonly></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="Enfermedades">Enfermedades</label>
+                            <textarea class="form-control" rows="3" id="Enfermedades" readonly></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="Adicciones">Adicciones</label>
+                            <textarea class="form-control" rows="3" id="Adicciones" readonly></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="ProblemasFam">Problemas Familiares</label>
+                            <textarea class="form-control" rows="3" for="ProblemasFam" readonly></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="OriVoc">Orientación Vocacional</label>
+                            <input readonly type="text" class="form-control" id="OriVoc">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="Habitos">Hábitos de Estudio</label>
+                            <input readonly type="text" class="form-control" id="Habitos">
+                        </div>
+                    </div>
+                </div>';
+            }
+        }
+
         public function getIndGrupo(){
 
             $this->_sql="SELECT

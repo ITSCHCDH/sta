@@ -308,7 +308,7 @@ class ps{
             }
         }
         else {
-            echo json_encode(['error'=>true, 'er'=> "Error en" . $Grupos->error ]);
+            echo json_encode(['error'=>true, 'er'=> "<strong>Verifica que si aya agregado a esta persona como TUTOR</strong>'"]);
 
         }
     }

@@ -358,7 +358,7 @@ class Usuario{
               echo json_encode( array("error"=>true, "men"=> "Error, el tamaño máximo permitido es un 1MB"));
             }
             else if ($width > 500 || $height > 500) {
-                echo json_encode( array("error"=>true, "men"=> "Error la anchura y la altura maxima permitida es 500px"));
+                echo json_encode( array("error"=>true, "men"=> "Error la anchura y la altura máxima permitida es 500px"));
             }
             else if($width < 60 || $height < 60)  {
                 echo json_encode( array("error"=>true, "men"=> "Error la anchura y la altura mínima permitida es 60px"));
@@ -370,18 +370,18 @@ class Usuario{
                 if (move_uploaded_file($ruta_provisional, $src)) {
                     $arch=true;
                 }
-                $this->_sql=$tuser=="Alu" ? "UPDATE alumnos_caracterizacion SET al_img ='".$user.".".$tip[1]."' WHERE se_no_control=$user" : "UPDATE sta.usuario SET u_img = '".$user.".".$tip[1]."' WHERE u_Clave = $user";
+                $this->_sql=$tuser=="Alu" ? "UPDATE alumnos_caracterizacion SET al_img ='".$user.".".$tip[1]."' WHERE se_no_control='$user'" : "UPDATE sta.usuario SET u_img = '".$user.".".$tip[1]."' WHERE u_Clave = $user";
                 $resultado = $this->_db->query($this->_sql);
                 if($this->_db->affected_rows > 0){
                     $sql=true;
                 }
 
                 if ($arch==true && $sql=true) {
-                    echo json_encode( array("error"=>false, "men"=>"Se guardo correctamente la imagen".$this->_sql));
+                    echo json_encode( array("error"=>false, "men"=>"Se guardo correctamente la imagen"));
                     $_SESSION['usuario']['img']=$user.".".$tip[1];
                 }
                 else{
-                    echo json_encode( array("error"=>true, "men"=>"Hubo algun problema al subir la imagen"));
+                    echo json_encode( array("error"=>true, "men"=>"Hubo algún problema al subir la imagen"));
                 }
             }
         }
