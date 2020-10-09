@@ -34,14 +34,14 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- bootstrap theme -->
-    <link href="/sta/assets/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="/assets/css/bootstrap-theme.min.css" rel="stylesheet">
     <!--external css-->
     <!-- font icon -->
-    <link href="/sta/assets/css/elegant-icons-style.css" rel="stylesheet" />
-    <link href="/sta/assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="/assets/css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="/assets/css/font-awesome.css" rel="stylesheet" />
     <!-- Custom styles -->
-    <link href="/sta/assets/css/styleAdm.css" rel="stylesheet">
-    <link href="/sta/assets/css/style-responsive.css" rel="stylesheet" />
+    <link href="/assets/css/styleAdm.css" rel="stylesheet">
+    <link href="/assets/css/style-responsive.css" rel="stylesheet" />
     <style media="screen">
         .error{
         background-color: #E74F4F;
@@ -58,7 +58,7 @@
 
 </head>
 
-<body class="login-img3-body" style="background-image: url('/sta/assets/images/fondo.jpg');background-size: cover;">
+<body class="login-img3-body" style="background-image: url('/assets/images/fondo.jpg');background-size: cover;">
     <div class="error" id="error1">
         <span>El usuario no tiene permiso para acceder con este Rol.</span>
     </div>
