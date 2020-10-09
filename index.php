@@ -5,7 +5,7 @@
         if ($_SESSION['usuario']['Tipo']=="Admin"){
             header('location: /sta/Admin/');
         }elseif ($_SESSION['usuario']['Tipo']=="Profe"){
-            header('location: /sta/Profe/');
+            header('location: /Profe/');
         }elseif ($_SESSION['usuario']['Tipo']=="Tutor"){
             header('location: /sta/Tutor/');
         }elseif ($_SESSION['usuario']['Tipo']=="Jefe"){
