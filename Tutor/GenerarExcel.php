@@ -21,9 +21,9 @@
 			}
 		}
 	}else{
-		header('location:/sta/php/CerrarSesion.php');
+		header('location:/php/CerrarSesion.php');
 	}
-	require_once $_SERVER["DOCUMENT_ROOT"]."/sta/php/dbconfig.php";
+	require_once $_SERVER["DOCUMENT_ROOT"]."/php/dbconfig.php";
 	$conectar = new mysqli(DB_SERVER,DB_USER,DB_PASS,DB_NAME);
 	if ($conectar ->connect_errno) {
 		echo "Fallo al conectar a MySQL: ". $conectar->connect_error;

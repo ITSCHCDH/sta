@@ -1,5 +1,5 @@
 <?php
-    require_once $_SERVER["DOCUMENT_ROOT"]."/sta/php/dbconfig.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/php/dbconfig.php";
 
     class Alumno{
 
@@ -52,7 +52,7 @@
                     <fieldset>
                         <div class='row'>
                             <div class='col-md-12 col-sm-6'>
-                                <img src='/sta/assets/images/".(isset($row['al_img'])?'Alu/'.$row['al_img']:'itsch.png')."' alt='FOTOALUMNO' class='img-responsive'>
+                                <img src='/assets/images/".(isset($row['al_img'])?'Alu/'.$row['al_img']:'itsch.png')."' alt='FOTOALUMNO' class='img-responsive'>
                             </div>
                             <div class='col-md-12 col-sm-6'>
                                 <b>NO. CONTROL:</b> ".$row['se_no_control']."<br>
@@ -89,7 +89,7 @@
                         <fieldset>
                             <div class='row'>
                                 <div class='col-md-12 col-sm-6'>
-                                    <img src='/sta/assets/images/avatar1_small.jpg' alt='FOTOALUMNO' class='img-responsive'>
+                                    <img src='/assets/images/avatar1_small.jpg' alt='FOTOALUMNO' class='img-responsive'>
                                 </div>
                                 <div class='col-md-12 col-sm-6'>
                                     <b>NO. CONTROL:</b> ".$row['alu_NumControl']."<br>
@@ -3638,7 +3638,7 @@
                 $tipo = $file["type"];
                 $ruta_provisional = $file["tmp_name"];
                 $size = $file["size"];
-                $carpeta = $_SERVER["DOCUMENT_ROOT"]."/sta/pdf/";
+                $carpeta = $_SERVER["DOCUMENT_ROOT"]."/pdf/";
                 $tip=explode("/", $tipo);
 
                 if ($tipo != 'application/pdf' ) {
@@ -3693,7 +3693,7 @@
                     echo '<div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-2 toppad">
                                 <h2>Puedes ver tu antigua ficha aqui</h2>'.
-                                '<a class="btn btn-primary view-pdf" download="'.$no.'.pdf" href="/sta/pdf/'.$row['al_pdf'].'">Ver PDF</a>
+                                '<a class="btn btn-primary view-pdf" download="'.$no.'.pdf" href="/pdf/'.$row['al_pdf'].'">Ver PDF</a>
                             </div>
                         </div>';
                 }

@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER["DOCUMENT_ROOT"]."/sta/php/dbconfig.php";
+require_once $_SERVER["DOCUMENT_ROOT"]."/php/dbconfig.php";
 class ps{
 
     protected $_db;
@@ -451,7 +451,7 @@ class ps{
                                 <td>".$row['alu_no_control']."</td>
                                 <td><a target='blank' href='PerfilAlumno.php?NoCon=".$row['alu_no_control']."'>".$mrow['dp_ap_paterno']." ".$mrow['dp_ap_materno']." ".$mrow['dp_nombre']."</a></td>
                                 <td>Si</td>
-                                <td>".(isset($mrow['al_pdf'])?'<a class="btn btn-primary view-pdf" download="'.$row['alu_no_control'].'.pdf" href="/sta/pdf/'.$mrow['al_pdf'].'">Ver PDF</a>':'')."   </td>
+                                <td>".(isset($mrow['al_pdf'])?'<a class="btn btn-primary view-pdf" download="'.$row['alu_no_control'].'.pdf" href="/pdf/'.$mrow['al_pdf'].'">Ver PDF</a>':'')."   </td>
 
                             </tr>";
                         }

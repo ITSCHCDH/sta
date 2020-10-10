@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER["DOCUMENT_ROOT"]."/sta/php/dbconfig.php";
+require_once $_SERVER["DOCUMENT_ROOT"]."/php/dbconfig.php";
 
 class Usuario{
 
@@ -96,7 +96,7 @@ class Usuario{
 
                                         <div class="row">
                                             <div class="col-md-3 col-lg-3 " align="center">
-                                                <img alt="User Pic" src="/sta/assets/images/'.($row['al_img']!=""?'Alu/'.$row['al_img']:'avatar1_small.jpg').'" class="img-circle img-responsive">
+                                                <img alt="User Pic" src="/assets/images/'.($row['al_img']!=""?'Alu/'.$row['al_img']:'avatar1_small.jpg').'" class="img-circle img-responsive">
                                             </div>
                                             <div class=" col-md-9 col-lg-9 ">
                                                 <table class="table table-user-information">
@@ -251,7 +251,7 @@ class Usuario{
 
                                         <div class="row">
                                             <div class="col-md-3 col-lg-3 " align="center">
-                                                <img alt="User Picture" src="/sta/assets/images/'.($row['u_img']!=""?('Users/'.$row['u_img']):'avatar1_small.jpg').'" class="img-circle img-responsive">
+                                                <img alt="User Picture" src="/assets/images/'.($row['u_img']!=""?('Users/'.$row['u_img']):'avatar1_small.jpg').'" class="img-circle img-responsive">
                                             </div>
                                             <div class=" col-md-9 col-lg-9 ">
                                                 <table class="table table-user-information">
@@ -348,7 +348,7 @@ class Usuario{
             $dimensiones = getimagesize($ruta_provisional);
             $width = $dimensiones[0];
             $height = $dimensiones[1];
-             $carpeta = $_SERVER["DOCUMENT_ROOT"]."/sta/assets/images/". ($tuser=="Alu" ? "Alu/" : "Users/");
+             $carpeta = $_SERVER["DOCUMENT_ROOT"]."/assets/images/". ($tuser=="Alu" ? "Alu/" : "Users/");
             $tip=explode("/", $tipo);
 
             if ($tipo != 'image/jpg' && $tipo != 'image/jpeg' && $tipo != 'image/png' && $tipo != 'image/gif') {

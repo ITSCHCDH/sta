@@ -20,7 +20,7 @@
         header('location: '.$_SERVER["DOCUMENT_ROOT"].'/');
     }
 
-    require_once $_SERVER["DOCUMENT_ROOT"].'/sta/php/clases/Alumno.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/php/clases/Alumno.php';
     $Alumno1 = new Alumno();
  ?>
 <!DOCTYPE html>
@@ -34,7 +34,7 @@
 
     <!-- css -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link href="/sta/assets/css/style.css" rel="stylesheet" />
+    <link href="/assets/css/style.css" rel="stylesheet" />
     <?php echo "<script>var pass='".$_SESSION['usuario']['passw']."'; var userT='".$_SESSION['usuario']['Tipo']."'; var user='".$_SESSION['usuario']['Clave']."'; </script>";
  ?>
 </head>
@@ -44,10 +44,10 @@
     <!-- box1 -->
     <div id="box1" class="row home">
         <div class="col-md-6 col-sm-6">
-            <a href="index.php"><img src="/sta/assets/images/CABECERA.PNG" class="img-responsive izquierda ciento20" alt="Responsive image"></a>
+            <a href="index.php"><img src="/assets/images/CABECERA.PNG" class="img-responsive izquierda ciento20" alt="Responsive image"></a>
         </div>
         <div class="col-md-6 col-sm-6">
-            <a href="http://www.itsch.edu.mx/"><img src="/sta/assets/images/itsch.png" class="img-responsive derecha ciento20" alt="Responsive image"></a>
+            <a href="http://www.itsch.edu.mx/"><img src="/assets/images/itsch.png" class="img-responsive derecha ciento20" alt="Responsive image"></a>
         </div>
     </div>
     <!-- /box1 -->
@@ -66,7 +66,7 @@
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse-main">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/sta/php/CerrarSesion.php">Cerrar Sesión</a></li>
+                    <li><a href="/php/CerrarSesion.php">Cerrar Sesión</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-left">
                     <li><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
@@ -143,7 +143,7 @@
     </div>
     <!-- footer -->
     <footer>
-        <img src="/sta/assets/images/cedeit.jpg" class="img-responsive imgfoot">
+        <img src="/assets/images/cedeit.jpg" class="img-responsive imgfoot">
         <div class="footer">
             <div class="container">
                 <div class="row" id="derechos">
@@ -160,9 +160,9 @@
     <!-- /footer -->
 
     <!-- js -->
-    <script src="/sta/assets/js/jquery.js" charset="utf-8"></script>
+    <script src="/assets/js/jquery.js" charset="utf-8"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="/sta/assets/js/main.js"></script>
+    <script src="/assets/js/main.js"></script>
 
 </body>
 

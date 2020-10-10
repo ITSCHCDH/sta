@@ -20,9 +20,9 @@
             }
         }
     }else{
-        header('location:/sta/php/CerrarSesion.php');
+        header('location:/php/CerrarSesion.php');
     }
-    require_once $_SERVER["DOCUMENT_ROOT"].'/sta/php/clases/Alumno.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/php/clases/Alumno.php';
     $Alumno1 = new Alumno();
 ?>
 <!DOCTYPE html>
@@ -35,10 +35,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <!-- css -->
-    <link href="/sta/assets/css/jquery.loadingModal.min.css" rel="stylesheet">
+    <link href="/assets/css/jquery.loadingModal.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link href="/sta/assets/css/style.css" rel="stylesheet" />
-    <link href="/sta/assets/css/styleAlu.css" rel="stylesheet" />
+    <link href="/assets/css/style.css" rel="stylesheet" />
+    <link href="/assets/css/styleAlu.css" rel="stylesheet" />
     <style media="screen">
         .table-sortable tbody tr {
             cursor: move;
@@ -131,10 +131,10 @@
     <!-- box1 -->
     <div id="box1" class="row home">
         <div class="col-md-6 col-sm-6">
-            <img src="/sta/assets/images/CABECERA.PNG" class="img-responsive izquierda ciento20" alt="Responsive image">
+            <img src="/assets/images/CABECERA.PNG" class="img-responsive izquierda ciento20" alt="Responsive image">
         </div>
         <div class="col-md-6 col-sm-6">
-            <img src="/sta/assets/images/itsch.png" class="img-responsive derecha ciento20" alt="Responsive image">
+            <img src="/assets/images/itsch.png" class="img-responsive derecha ciento20" alt="Responsive image">
         </div>
     </div>
     <!-- /box1 -->
@@ -154,7 +154,7 @@
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="profile-ava">
-                                <img alt="" src="/sta/assets/images/<?php echo $_SESSION['usuario']['img']? 'Alu/'.$_SESSION['usuario']['img']:'avatar1_small.jpg'; ?>" style="width:33px;">
+                                <img alt="" src="/assets/images/<?php echo $_SESSION['usuario']['img']? 'Alu/'.$_SESSION['usuario']['img']:'avatar1_small.jpg'; ?>" style="width:33px;">
                             </span>
                             <span class="username"><?php echo $_SESSION['usuario']['Nombre']; ?></span>
                             <b class="caret"></b>
@@ -165,7 +165,7 @@
                                 <a href="profile.php"><i class="icon_profile"></i> Mi Perfil</a>
                             </li>
                             <li>
-                                <a href="/sta/php/CerrarSesion.php"><i class="icon_key_alt"></i> Cerrar Sesión</a>
+                                <a href="/php/CerrarSesion.php"><i class="icon_key_alt"></i> Cerrar Sesión</a>
                             </li>
                         </ul>
                     </li>
@@ -230,7 +230,7 @@
         <!-- footer -->
     <div class="clearfix"></div>
     <footer>
-        <img src="/sta/assets/images/cedeit.jpg" class="img-responsive imgfoot" style="padding-right: 0px !important; padding-left: 0px !important;">
+        <img src="/assets/images/cedeit.jpg" class="img-responsive imgfoot" style="padding-right: 0px !important; padding-left: 0px !important;">
         <div class="footer">
             <div class="container">
                 <div class="row" id="derechos">
@@ -249,9 +249,9 @@
     <!-- js -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js" integrity="sha256-oTyWrNiP6Qftu4vs2g0RPCKr3g1a6QTlITNgoebxRc4=" crossorigin="anonymous"></script>
-    <script src="/sta/assets/js/jquery.loadingModal.min.js"></script>
+    <script src="/assets/js/jquery.loadingModal.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="/sta/assets/js/main.js"></script>
+    <script src="/assets/js/main.js"></script>
     <script type="text/javascript">
         $(function() {
             $('a[title]').tooltip();

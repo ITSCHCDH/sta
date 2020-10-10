@@ -3,21 +3,21 @@
 
     if (isset($_SESSION['usuario'])) {
         if ($_SESSION['usuario']['Tipo']=="Admin"){
-            header('location: /sta/Admin/');
+            header('location: /Admin/');
         }elseif ($_SESSION['usuario']['Tipo']=="Profe"){
             header('location: /Profe/');
         }elseif ($_SESSION['usuario']['Tipo']=="Tutor"){
-            header('location: /sta/Tutor/');
+            header('location: /Tutor/');
         }elseif ($_SESSION['usuario']['Tipo']=="Jefe"){
-            header('location: /sta/JefeCar/');
+            header('location: /JefeCar/');
         }elseif ($_SESSION['usuario']['Tipo']=="Dire"){
-            header('location: /sta/Direc/');
+            header('location: /Direc/');
         }elseif ($_SESSION['usuario']['Tipo']=="Tutoria"){
-            header('location: /sta/ATutor/');
+            header('location: /ATutor/');
         }elseif ($_SESSION['usuario']['Tipo']=="Medic"){
-            header('location: /sta/Medico/');
+            header('location: /Medico/');
         }elseif ($_SESSION['usuario']['Tipo']=="Alu"){
-            header('location: /sta/Alumnos/');
+            header('location: /Alumnos/');
         }
     }
 ?>

@@ -9,8 +9,8 @@
 
     <!-- css -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link href="/sta/assets/css/style.css" rel="stylesheet" />
-    <link href="/sta/assets/css/styleAlu.css" rel="stylesheet" />
+    <link href="/assets/css/style.css" rel="stylesheet" />
+    <link href="/assets/css/styleAlu.css" rel="stylesheet" />
     <style media="screen">
         .table-sortable tbody tr {
             cursor: move;
@@ -104,7 +104,7 @@
 
 <body><?php
 session_start();
-require_once($_SERVER["DOCUMENT_ROOT"] . '/sta/php/clases/Alumno.php');
+require_once($_SERVER["DOCUMENT_ROOT"] . '/php/clases/Alumno.php');
 $Alu = new Alumno();
 $Alu->aluFiFamilia($_SESSION['usuario']['Clave']);
  ?>
