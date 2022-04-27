@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER["DOCUMENT_ROOT"]."/sta/php/dbconfig.php";
+require_once $_SERVER["DOCUMENT_ROOT"]."/php/dbconfig.php";
 
 class Usuario{
 
@@ -96,7 +96,7 @@ class Usuario{
 
                                         <div class="row">
                                             <div class="col-md-3 col-lg-3 " align="center">
-                                                <img alt="User Pic" src="/sta/assets/images/'.($row['al_img']!=""?'Alu/'.$row['al_img']:'avatar1_small.jpg').'" class="img-circle img-responsive">
+                                                <img alt="User Pic" src="/assets/images/'.($row['al_img']!=""?'Alu/'.$row['al_img']:'avatar1_small.jpg').'" class="img-circle img-responsive">
                                             </div>
                                             <div class=" col-md-9 col-lg-9 ">
                                                 <table class="table table-user-information">
@@ -251,7 +251,7 @@ class Usuario{
 
                                         <div class="row">
                                             <div class="col-md-3 col-lg-3 " align="center">
-                                                <img alt="User Picture" src="/sta/assets/images/'.($row['u_img']!=""?('Users/'.$row['u_img']):'avatar1_small.jpg').'" class="img-circle img-responsive">
+                                                <img alt="User Picture" src="/assets/images/'.($row['u_img']!=""?('Users/'.$row['u_img']):'avatar1_small.jpg').'" class="img-circle img-responsive">
                                             </div>
                                             <div class=" col-md-9 col-lg-9 ">
                                                 <table class="table table-user-information">
@@ -348,7 +348,7 @@ class Usuario{
             $dimensiones = getimagesize($ruta_provisional);
             $width = $dimensiones[0];
             $height = $dimensiones[1];
-             $carpeta = $_SERVER["DOCUMENT_ROOT"]."/sta/assets/images/". ($tuser=="Alu" ? "Alu/" : "Users/");
+             $carpeta = $_SERVER["DOCUMENT_ROOT"]."/assets/images/". ($tuser=="Alu" ? "Alu/" : "Users/");
             $tip=explode("/", $tipo);
 
             if ($tipo != 'image/jpg' && $tipo != 'image/jpeg' && $tipo != 'image/png' && $tipo != 'image/gif') {
@@ -358,7 +358,7 @@ class Usuario{
               echo json_encode( array("error"=>true, "men"=> "Error, el tamaño máximo permitido es un 1MB"));
             }
             else if ($width > 500 || $height > 500) {
-                echo json_encode( array("error"=>true, "men"=> "Error la anchura y la altura maxima permitida es 500px"));
+                echo json_encode( array("error"=>true, "men"=> "Error la anchura y la altura máxima permitida es 500px"));
             }
             else if($width < 60 || $height < 60)  {
                 echo json_encode( array("error"=>true, "men"=> "Error la anchura y la altura mínima permitida es 60px"));
@@ -370,18 +370,18 @@ class Usuario{
                 if (move_uploaded_file($ruta_provisional, $src)) {
                     $arch=true;
                 }
-                $this->_sql=$tuser=="Alu" ? "UPDATE alumnos_caracterizacion SET al_img ='".$user.".".$tip[1]."' WHERE se_no_control=$user" : "UPDATE sta.usuario SET u_img = '".$user.".".$tip[1]."' WHERE u_Clave = $user";
+                $this->_sql=$tuser=="Alu" ? "UPDATE alumnos_caracterizacion SET al_img ='".$user.".".$tip[1]."' WHERE se_no_control='$user'" : "UPDATE sta.usuario SET u_img = '".$user.".".$tip[1]."' WHERE u_Clave = $user";
                 $resultado = $this->_db->query($this->_sql);
                 if($this->_db->affected_rows > 0){
                     $sql=true;
                 }
 
                 if ($arch==true && $sql=true) {
-                    echo json_encode( array("error"=>false, "men"=>"Se guardo correctamente la imagen".$this->_sql));
+                    echo json_encode( array("error"=>false, "men"=>"Se guardo correctamente la imagen"));
                     $_SESSION['usuario']['img']=$user.".".$tip[1];
                 }
                 else{
-                    echo json_encode( array("error"=>true, "men"=>"Hubo algun problema al subir la imagen"));
+                    echo json_encode( array("error"=>true, "men"=>"Hubo algún problema al subir la imagen"));
                 }
             }
         }

@@ -20,9 +20,9 @@
             }
         }
     }else{
-        header('location:/sta/php/CerrarSesion.php');
+        header('location:/php/CerrarSesion.php');
     }
-    require_once $_SERVER["DOCUMENT_ROOT"].'/sta/php/clases/Alumno.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/php/clases/Alumno.php';
     $Alumno1 = new Alumno();
 ?>
 <!DOCTYPE html>
@@ -37,8 +37,8 @@
     <!-- css -->
     <!--link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" rel="stylesheet"-->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link href="/sta/assets/css/style.css" rel="stylesheet" />
-    <link href="/sta/assets/css/styleAlu.css" rel="stylesheet" />
+    <link href="/assets/css/style.css" rel="stylesheet" />
+    <link href="/assets/css/styleAlu.css" rel="stylesheet" />
     <style media="screen">
         .iframe-container {
             padding-bottom: 60%;
@@ -64,10 +64,10 @@
     <!-- box1 -->
     <div id="box1" class="row home">
         <div class="col-md-6 col-sm-6">
-            <img src="/sta/assets/images/CABECERA.PNG" class="img-responsive izquierda ciento20" alt="Responsive image">
+            <img src="/assets/images/CABECERA.PNG" class="img-responsive izquierda ciento20" alt="Responsive image">
         </div>
         <div class="col-md-6 col-sm-6">
-            <img src="/sta/assets/images/itsch.png" class="img-responsive derecha ciento20" alt="Responsive image">
+            <img src="/assets/images/itsch.png" class="img-responsive derecha ciento20" alt="Responsive image">
         </div>
     </div>
     <!-- /box1 -->
@@ -87,7 +87,7 @@
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="profile-ava">
-                                <img alt="" src="/sta/assets/images/<?php echo $_SESSION['usuario']['img']? 'Alu/'.$_SESSION['usuario']['img']:'avatar1_small.jpg'; ?>" style="width:33px;">
+                                <img alt="" src="/assets/images/<?php echo $_SESSION['usuario']['img']? 'Alu/'.$_SESSION['usuario']['img']:'avatar1_small.jpg'; ?>" style="width:33px;">
                             </span>
                             <span class="username"><?php echo $_SESSION['usuario']['Nombre']; ?></span>
                             <b class="caret"></b>
@@ -98,7 +98,7 @@
                                 <a href="profile.php"><i class="icon_profile"></i> Mi Perfil</a>
                             </li>
                             <li>
-                                <a href="/sta/php/CerrarSesion.php"><i class="icon_key_alt"></i> Cerrar Sesión</a>
+                                <a href="/php/CerrarSesion.php"><i class="icon_key_alt"></i> Cerrar Sesión</a>
                             </li>
                         </ul>
                     </li>
@@ -161,7 +161,7 @@
         <!-- footer -->
     <div class="clearfix"></div>
     <footer>
-        <img src="/sta/assets/images/cedeit.jpg" class="img-responsive imgfoot" style="padding-right: 0px !important; padding-left: 0px !important;">
+        <img src="/assets/images/cedeit.jpg" class="img-responsive imgfoot" style="padding-right: 0px !important; padding-left: 0px !important;">
         <div class="footer">
             <div class="container">
                 <div class="row" id="derechos">
@@ -178,11 +178,11 @@
     </footer>
     <!-- /footer -->
     <!-- js -->
-    <script src="/sta/assets/js/jquery.js" charset="utf-8"></script>
+    <script src="/assets/js/jquery.js" charset="utf-8"></script>
     <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js" integrity="sha256-oTyWrNiP6Qftu4vs2g0RPCKr3g1a6QTlITNgoebxRc4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="/sta/assets/js/main.js"></script>
+    <script src="/assets/js/main.js"></script>
     <script type="text/javascript">
         (function(a){a.createModal=function(b){defaults={title:"",message:"Your Message Goes Here!",closeButton:true,scrollable:false};var b=a.extend({},defaults,b);var c=(b.scrollable===true)?'style="max-height: 420px;overflow-y: auto;"':"";html='<div class="modal fade" id="myModal">';html+='<div class="modal-dialog">';html+='<div class="modal-content">';html+='<div class="modal-header">';html+='<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';if(b.title.length>0){html+='<h4 class="modal-title">'+b.title+"</h4>"}html+="</div>";html+='<div class="modal-body" '+c+">";html+=b.message;html+="</div>";html+='<div class="modal-footer">';if(b.closeButton===true){html+='<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>'}html+="</div>";html+="</div>";html+="</div>";html+="</div>";a("body").prepend(html);a("#myModal").modal().on("hidden.bs.modal",function(){a(this).remove()})}})(jQuery);
 

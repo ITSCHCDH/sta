@@ -21,11 +21,11 @@
             }
         }
     }else{
-        header('location:/sta/php/CerrarSesion.php');
+        header('location:/php/CerrarSesion.php');
     }
 
-    require_once $_SERVER["DOCUMENT_ROOT"].'/sta/php/clases/Alumno.php';
-    require_once $_SERVER["DOCUMENT_ROOT"].'/sta/php/clases/Grupo.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/php/clases/Alumno.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/php/clases/Grupo.php';
     $Alumno1 = new Alumno();
     $gpo = new Grupo();
  ?>
@@ -41,7 +41,7 @@
     <!-- css -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link href="/sta/assets/css/style.css" rel="stylesheet" />
+    <link href="/assets/css/style.css" rel="stylesheet" />
     <?php echo "<script>var pass='".$_SESSION['usuario']['passw']."'; var userT='".$_SESSION['usuario']['Tipo']."'; var user='".$_SESSION['usuario']['Clave']."'; </script>";
     ?>
 </head>
@@ -51,11 +51,11 @@
     <!-- box1 -->
     <div id="box1" class="row home">
         <div class="col-md-6 col-sm-6">
-            <a href="index.php"><img src="/sta/assets/images/CABECERA.PNG" class="img-responsive izquierda ciento20"
+            <a href="index.php"><img src="/assets/images/CABECERA.PNG" class="img-responsive izquierda ciento20"
                     alt="Responsive image"></a>
         </div>
         <div class="col-md-6 col-sm-6">
-            <a href="http://www.itsch.edu.mx/"><img src="/sta/assets/images/itsch.png"
+            <a href="http://www.itsch.edu.mx/"><img src="/assets/images/itsch.png"
                     class="img-responsive derecha ciento20" alt="Responsive image"></a>
         </div>
     </div>
@@ -79,7 +79,7 @@
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="profile-ava">
                                 <img alt=""
-                                    src="/sta/assets/images/<?php echo $_SESSION['usuario']['img']? 'Users/'.$_SESSION['usuario']['img']:'avatar1_small.jpg'; ?>"
+                                    src="/assets/images/<?php echo $_SESSION['usuario']['img']? 'Users/'.$_SESSION['usuario']['img']:'avatar1_small.jpg'; ?>"
                                     style="width:33px;">
                             </span>
                             <span class="username"><?php echo $_SESSION['usuario']['Nombre']; ?></span>
@@ -91,7 +91,7 @@
                                 <a href="profile.php"><i class="icon_profile"></i> Mi Perfil</a>
                             </li>
                             <li>
-                                <a href="/sta/php/CerrarSesion.php"><i class="icon_key_alt"></i> Cerrar Sesión</a>
+                                <a href="/php/CerrarSesion.php"><i class="icon_key_alt"></i> Cerrar Sesión</a>
                             </li>
                         </ul>
                     </li>
@@ -132,49 +132,67 @@
              ?>
             </div>
             <div class='col-md-10 col-lg-9'>
-                <div class='semaforos'>
-                    <h4>SEMÁFOROS</h4>
-                    <table class='table'>
-                        <thead>
-                            <tr>
-                                <th>Medico</th>
-                                <th>Psicología</th>
-                                <th>Calificaciones</th>
-                                <th>Servicio social</th>
-                                <th>Cultura y deporte</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class='active'>
-                                <?php $Alumno1 -> AlumnoSemaforos(); ?>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <hr>
-                <div class='materias'>
-                    <h4>Calificaciones</h4>
-                    <table class='table'>
-                        <?php
-                         $Alumno1 -> AlumnoCalificaciones();
-                      ?>
-                    </table>
-                </div>
-                <hr>
-                <div class='semestre'>
-                    <h4>Semestres</h4>
-                    <?php
-                     $Alumno1 -> AlumnoSemestre($_GET['NoCon']);
-                  ?>
-                </div>
-                <hr>
+                <div>
+                    <div class="bs-example bs-example-tabs" data-example-id="togglable-tabs">
+                        <ul class="nav nav-tabs" id="myTabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab"
+                                    data-toggle="tab" aria-controls="home" aria-expanded="true">STA</a></li>
+                            <li role="presentation" class=""><a href="#profile" role="tab" id="profile-tab"
+                                    data-toggle="tab" aria-controls="profile" aria-expanded="false">Caracterización
+                                    (sabana)</a></li>
 
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade active in" role="tabpanel" id="home" aria-labelledby="home-tab">
+                                <div class='semaforos'>
+                                    <h4>SEMÁFOROS</h4>
+                                    <table class='table'>
+                                        <thead>
+                                            <tr>
+                                                <th>Medico</th>
+                                                <th>Psicología</th>
+                                                <th>Calificaciones</th>
+                                                <th>Servicio social</th>
+                                                <th>Cultura y deporte</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class='active'>
+                                                <?php $Alumno1 -> AlumnoSemaforos(); ?>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <hr>
+                                <div class='materias'>
+                                    <h4>Calificaciones</h4>
+                                    <table class='table'>
+                                        <?php
+                                        $Alumno1 -> AlumnoCalificaciones();
+                                    ?>
+                                    </table>
+                                </div>
+                                <hr>
+                                <div class='semestre'>
+                                    <h4>Semestres</h4>
+                                    <?php
+                                    $Alumno1 -> AlumnoSemestre($_GET['NoCon']);
+                                ?>
+                                </div>
+                                <hr>
+                            </div>
+                            <div class="tab-pane fade" role="tabpanel" id="profile" aria-labelledby="profile-tab">
+                                <?php $Alumno1-> AlumnoSabana($_GET['NoCon']) ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <!-- footer -->
     <footer>
-        <img src="/sta/assets/images/cedeit.jpg" class="img-responsive imgfoot">
+        <img src="/assets/images/cedeit.jpg" class="img-responsive imgfoot">
         <div class="footer">
             <div class="container">
                 <div class="row" id="derechos">
@@ -192,11 +210,11 @@
     <!-- /footer -->
 
     <!-- js -->
-    <script src="/sta/assets/js/jquery.js" charset="utf-8"></script>
+    <script src="/assets/js/jquery.js" charset="utf-8"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
     </script>
-    <script src="/sta/assets/js/main.js"></script>
+    <script src="/assets/js/main.js"></script>
     <script type="text/javascript">
     $(function() {
         $('[data-toggle="tooltip"]').tooltip()

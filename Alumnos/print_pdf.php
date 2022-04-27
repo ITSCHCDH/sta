@@ -1,8 +1,8 @@
 <?php
-require_once $_SERVER["DOCUMENT_ROOT"].'/sta/dompdf/lib/html5lib/Parser.php';
-require_once $_SERVER["DOCUMENT_ROOT"].'/sta/dompdf/lib/php-font-lib/src/FontLib/Autoloader.php';
-require_once $_SERVER["DOCUMENT_ROOT"].'/sta/dompdf/lib/php-svg-lib/src/autoload.php';
-require_once $_SERVER["DOCUMENT_ROOT"].'/sta/dompdf/src/Autoloader.php';
+require_once $_SERVER["DOCUMENT_ROOT"].'/dompdf/lib/html5lib/Parser.php';
+require_once $_SERVER["DOCUMENT_ROOT"].'/dompdf/lib/php-font-lib/src/FontLib/Autoloader.php';
+require_once $_SERVER["DOCUMENT_ROOT"].'/dompdf/lib/php-svg-lib/src/autoload.php';
+require_once $_SERVER["DOCUMENT_ROOT"].'/dompdf/src/Autoloader.php';
 session_start();
 
 if (isset($_SESSION['usuario']['Tipo'])) {
@@ -24,9 +24,9 @@ if (isset($_SESSION['usuario']['Tipo'])) {
         }
     }
 }else{
-    header('location:/sta/php/CerrarSesion.php');
+    header('location:/php/CerrarSesion.php');
 }
-require_once($_SERVER["DOCUMENT_ROOT"] . '/sta/php/clases/Alumno.php');
+require_once($_SERVER["DOCUMENT_ROOT"] . '/php/clases/Alumno.php');
 $Alu = new Alumno();
 
 Dompdf\Autoloader::register();

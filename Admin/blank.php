@@ -29,7 +29,7 @@
     <meta name="description" content="SISTEMA DE TRAYECTORIA ACADEMICA">
     <meta name="author" content="Jorge Armando Rocha Mendoza">
 
-    <link rel="shortcut icon" href="/sta/assets/images/favicon.png">
+    <link rel="shortcut icon" href="/assets/images/favicon.png">
 
     <title>Sistema de  Trayectoria Academica</title>
 
@@ -39,18 +39,18 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <!--external css-->
     <!-- font icon -->
-    <link href="/sta/assets/css/elegant-icons-style.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/sta/assets/css/font-awesome.min.css">
+    <link href="/assets/css/elegant-icons-style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
 
     <!-- Custom styles -->
     <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="/sta/assets/css/styleAdm.css" rel="stylesheet">
-    <link href="/sta/assets/css/style-responsive.css" rel="stylesheet" />
+    <link href="/assets/css/styleAdm.css" rel="stylesheet">
+    <link href="/assets/css/style-responsive.css" rel="stylesheet" />
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
     <!--[if lt IE 9]>
-      <script src="/sta/assets/js/html5shiv.js"></script>
-      <script src="/sta/assets/js/respond.min.js"></script>
-      <script src="/sta/assets/js/lte-ie7.js"></script>
+      <script src="/assets/js/html5shiv.js"></script>
+      <script src="/assets/js/respond.min.js"></script>
+      <script src="/assets/js/lte-ie7.js"></script>
     <![endif]-->
 </head>
 <body>
@@ -62,7 +62,7 @@
                 <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
             </div>
             <!--logo start-->
-            <a href="/sta/Admin/" class="logo">STA <span class="lite">Admin</span></a>
+            <a href="/Admin/" class="logo">STA <span class="lite">Admin</span></a>
             <!--logo end-->
             <div class="nav search-row" id="top_menu">
                 <!--  search form start -->
@@ -82,7 +82,7 @@
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="profile-ava">
-                                <img alt="" src="/sta/assets/images/avatar1_small.jpg">
+                                <img alt="" src="/assets/images/avatar1_small.jpg">
                             </span>
                             <span class="username"><?php echo $_SESSION['usuario']['Nombre']; ?></span>
                             <b class="caret"></b>
@@ -93,7 +93,7 @@
                                 <a href="profile.php"><i class="icon_profile"></i> Mi Perfil</a>
                             </li>
                             <li>
-                                <a href="/sta/php/CerrarSesion.php"><i class="icon_key_alt"></i> Cerrar Sesión</a>
+                                <a href="/php/CerrarSesion.php"><i class="icon_key_alt"></i> Cerrar Sesión</a>
                             </li>
                         </ul>
                     </li>
@@ -149,7 +149,7 @@
                     <div class="col-lg-12">
                         <h3 class="page-header"><i class="fa fa fa-bars"></i> Dashboard</h3>
                         <ol class="breadcrumb">
-                            <li><i class="fa fa-home"></i><a href="/sta/Admin/">Inicio</a></li>
+                            <li><i class="fa fa-home"></i><a href="/Admin/">Inicio</a></li>
                     </div>
                 </div>
                 <!-- page start-->
@@ -182,15 +182,15 @@
     </section>
     <!-- container section end -->
     <!-- javascripts -->
-    <script src="/sta/assets/js/jquery.js" charset="utf-8"></script>
+    <script src="/assets/js/jquery.js" charset="utf-8"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <!-- nice scroll -->
-    <script src="/sta/assets/js/jquery.scrollTo.min.js"></script>
-    <script src="/sta/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="/assets/js/jquery.scrollTo.min.js"></script>
+    <script src="/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
     <!--custome script for all page-->
-    <script src="/sta/assets/js/scripts.js"></script>
+    <script src="/assets/js/scripts.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="/sta/assets/js/main.js"></script>
+    <script src="/assets/js/main.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
             $('#mitabla').DataTable({

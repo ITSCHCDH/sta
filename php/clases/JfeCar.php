@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER["DOCUMENT_ROOT"]."/sta/php/dbconfig.php";
+require_once $_SERVER["DOCUMENT_ROOT"]."/php/dbconfig.php";
 class jfe{
 
     protected $_db;

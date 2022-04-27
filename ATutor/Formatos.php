@@ -21,9 +21,9 @@
             }
         }
     }else{
-        header('location:/sta/php/CerrarSesion.php');
+        header('location:/php/CerrarSesion.php');
     }
-    require_once  $_SERVER["DOCUMENT_ROOT"].'/sta/php/clases/areaPS.php';
+    require_once  $_SERVER["DOCUMENT_ROOT"].'/php/clases/areaPS.php';
     $Grup = new ps();
  ?>
 <!DOCTYPE html>
@@ -39,7 +39,7 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="/sta/assets/css/style.css" rel="stylesheet" />
+    <link href="/assets/css/style.css" rel="stylesheet" />
     <style media="screen">
     .iframe-container {
         padding-bottom: 60%;
@@ -67,11 +67,11 @@
     <!-- box1 -->
     <div id="box1" class="row home">
         <div class="col-md-6 col-sm-6">
-            <a href="index.php"><img src="/sta/assets/images/CABECERA.PNG" class="img-responsive izquierda ciento20"
+            <a href="index.php"><img src="/assets/images/CABECERA.PNG" class="img-responsive izquierda ciento20"
                     alt="Responsive image"></a>
         </div>
         <div class="col-md-6 col-sm-6">
-            <a href="http://www.itsch.edu.mx/"><img src="/sta/assets/images/itsch.png"
+            <a href="http://www.itsch.edu.mx/"><img src="/assets/images/itsch.png"
                     class="img-responsive derecha ciento20" alt="Responsive image"></a>
         </div>
     </div>
@@ -95,7 +95,7 @@
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="profile-ava">
                                 <img alt=""
-                                    src="/sta/assets/images/<?php echo $_SESSION['usuario']['img']? 'Users/'.$_SESSION['usuario']['img']:'avatar1_small.jpg'; ?>"
+                                    src="/assets/images/<?php echo $_SESSION['usuario']['img']? 'Users/'.$_SESSION['usuario']['img']:'avatar1_small.jpg'; ?>"
                                     style="width:33px;">
                             </span>
                             <span class="username"><?php echo $_SESSION['usuario']['Nombre']; ?></span>
@@ -107,7 +107,7 @@
                                 <a href="profile.php"><i class="icon_profile"></i> Mi Perfil</a>
                             </li>
                             <li>
-                                <a href="/sta/php/CerrarSesion.php"><i class="icon_key_alt"></i> Cerrar Sesión</a>
+                                <a href="/php/CerrarSesion.php"><i class="icon_key_alt"></i> Cerrar Sesión</a>
                             </li>
                         </ul>
                     </li>
@@ -188,7 +188,7 @@
     </div>
     <!-- footer -->
     <footer>
-        <img src="/sta/assets/images/cedeit.jpg" class="img-responsive imgfoot">
+        <img src="/assets/images/cedeit.jpg" class="img-responsive imgfoot">
         <div class="footer">
             <div class="container">
                 <div class="row" id="derechos">
@@ -206,12 +206,12 @@
     <!-- /footer -->
 
     <!-- js -->
-    <script src="/sta/assets/js/jquery.js" charset="utf-8"></script>
+    <script src="/assets/js/jquery.js" charset="utf-8"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
     </script>
-    <script src="/sta/assets/js/main.js"></script>
+    <script src="/assets/js/main.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
         $('#mitabla').DataTable({
@@ -243,7 +243,7 @@
 
     $("#PScarrera2").on("change", function() {
         var idC = $("#PScarrera2").val();
-        var url = "/sta/php/init/ps_grupoXCarrera2.php";
+        var url = "/php/init/ps_grupoXCarrera2.php";
         $.ajax({
             type: "POST",
             url: url,
@@ -257,7 +257,7 @@
         });
     });
     $("#GrupoTuPDF2").on("change", function() {
-        var url = "/sta/php/init/GROUP_ListarPDF2.php";
+        var url = "/php/init/GROUP_ListarPDF2.php";
         $.ajax({
             type: "POST",
             url: url,
