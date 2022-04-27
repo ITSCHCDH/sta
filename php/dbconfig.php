@@ -7,7 +7,7 @@
     define("DB_NAME", "sta");
 
     // MySQl Caracterizacion
-    define("DB_SERVER2", "172.16.153.2");
+    define("DB_SERVER2", "172.16.253.2");
     define("DB_USER2", "stac");
     define("DB_PASS2", "\$T4ck-2019#");
     define("DB_NAME2", "caracterizacion");
