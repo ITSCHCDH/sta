@@ -35,7 +35,7 @@ class jfe{
             // De nuevo, no hacer esto en un sitio público, aunque nosotros mostraremos
             // cómo obtener información del error
             echo "Error: La ejecución de la consulta falló debido a: \n";
-            echo "Query: " . $sql . "\n";
+            echo "Query: " . $this->_sql . "\n";
             echo "Errno: " . $this->_db->errno . "\n";
             echo "Error: " . $this->_db->error . "\n";
             exit;
