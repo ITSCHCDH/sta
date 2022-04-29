@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once($_SERVER["DOCUMENT_ROOT"].'/sta/php/clases/User.php');
+require_once($_SERVER["DOCUMENT_ROOT"].'/php/clases/User.php');
 $Doc = new Usuario();
 
 $Doc->setPassWord($_POST['userT'],$_POST['user'],$_POST['pass']);
