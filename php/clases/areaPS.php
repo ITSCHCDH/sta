@@ -295,7 +295,14 @@ class ps{
         $Sem = ($_POST['semestre']);
         $Car = ($_POST['carrera']);
         $Iden = $this->_db->real_escape_string($_POST['Grupo']);
-
+        
+        if ($Car == 'TICS'){
+            $Car = '08';
+        }
+        if ($Car == 'NANO'){
+            $Car = '09';
+        }
+        
         $sql="INSERT INTO grupos_tutorias (cat_clave,gpo_sem,car_clave,gpo_identificador) values(?,?,?,?)";
 
         if ($Grupos=$this->_db->prepare($sql)) {
