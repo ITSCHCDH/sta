@@ -176,10 +176,10 @@
                                 <option value="06">INGENIERÍA BIOQUÍMICA</option>
                                 <option value="38">INGENIERÍA EN GESTIÓN EMPRESARIAL</option>
                                 <option value="16">INGENIERÍA INDUSTRIAL</option>
-                                <option value="35">INGENIERÍA MACARRÓNICA</option>
-                                <option value="NANO">INGENIERÍA NANOTECNOLOGIA</option>
+                                <option value="35">INGENIERÍA MECATRÓNICA</option>
+                                <option value="09">INGENIERÍA NANOTECNOLOGIA</option>
                                 <option value="07">INGENIERÍA EN SISTEMAS COMPUTACIONES</option>
-                                <option value="TICS">INGENIERÍA EN TECNOLOGÍAS DE LA INFORMACIÓN Y COMUNICACIÓN</option>
+                                <option value="08">INGENIERÍA EN TECNOLOGÍAS DE LA INFORMACIÓN Y COMUNICACIONES</option>
                             </select>
                         </div>
                         <div class="form-group">
